@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freshy Industries</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="navbar-left" style="margin-left: -24px;">
+            <a href="index.html"><img src="images/logo_freshy.png" alt="Freshy Industries Logo" class="navbar-logo"></a>
+        </div>
+
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li class="dropdown">
+                    <a href="#">Nos marques et produits <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <div class="dropdown-content">
+                        <a href="freshy_palm_page.html">Freshy Palm</a>
+                        <a href="freshy_fruit_boosté.html">Freshy le Fruit Boosté</a>
+                    </div>
+                </li>
+                <li><a href="#">Épicerie du terroir</a></li>
+                <li><a href="actualite.html">Actualités</a></li>
+                <li><a href="point_vente.html">Points de Vente</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <a href="#" class="nav-icon">Panier <i class="fas fa-shopping-bag"></i></a>
+                <a href="#" class="nav-icon"><i class="fas fa-search"></i></a>
+                <button class="btn-quote"><a href="devis.html"
+                        style="text-decoration: none; color: white; text-decoration: none; color: white; font-size: 12px; font-family: 'Poppins'; display: flex; align-items: center; justify-content: center;">Demander
+                        un
+                        devis</a></button>
+            </div>
+        </div>
+
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html" class="sidebar-link">Accueil</a></li>
+                <li class="sidebar-dropdown">
+                    <a href="#" class="dropdown-toggle">Nos marques et produits <i class="fas fa-chevron-down"></i></a>
+                    <ul class="sidebar-dropdown-content">
+                        <li><a href="freshy_palm_page.html">Freshy Palm</a></li>
+                        <li><a href="freshy_fruit_boosté.html">Freshy le Fruit Boosté</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="sidebar-link">Épicerie du terroir</a></li>
+                <li><a href="actualite.html" class="sidebar-link">Actualités</a></li>
+                <li><a href="point_vente.html" class="sidebar-link">Points de Vente</a></li>
+                <li><a href="contact.html" class="sidebar-link">Contact</a></li>
+                <li><a href="#" class="sidebar-icon">Panier <i class="fas fa-shopping-bag"></i></a></li>
+                <li><a href="devis.html" class="sidebar-cta">Demander un devis</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    <div class="container-fluid px-0">
+        <section class="product-categories">
+            <div class="category-card" style="background-image: url('images/Concentré.png');">
+                <div class="mini_card">
+                    <p class="para"
+                        style="color: #ffffff; font-size: 20px; font-weight: 500; width: 189px; height: 30px; position: absolute; bottom: 50px; left: 37px;">
+                        Crème concentrée</p>
+                </div>
+                <div class="overlay-content">
+                    <img src="images/Group 2.png" alt="Image du produit" style="position: relative; top: -49px;"
+                        class="product-img-overlay">
+                    <h3> <span>Crème concentrée</span> <br> de noix de palme</h3>
+                    <a href="#" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="category-card" style="background-image: url('images/Huile back.png');">
+                <div class="mini_card">
+                    <p
+                        style="left: 37px; font-weight: 500; color: #ffffff; font-size: 20px; position: absolute; bottom: 50px; width: 61px; height: 30px;">
+                        Huiles</p>
+                </div>
+                <div class="overlay-content">
+                    <img src="images/huile.png" alt="Image du produit" style="position: relative; top: -63px;"
+                        class="product-img-overlay">
+                    <h3>Huile Palmiste <br> Huile de Palme</h3>
+                    <a href="#" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+            <div class="category-card" style="background-image: url('images/Citronnade.png');">
+                <div class="mini_card">
+                    <p
+                        style="left: 37px; font-weight: 500; color: #ffffff; font-size: 20px; position: absolute; bottom: 50px; width: 89px; height: 30px;">
+                        Boissons</p>
+                </div>
+                <div class="overlay-content">
+                    <img src="images/citronnade-montage 2.png" alt="Image du produit"
+                        style="position: relative; top: -49px;" class="product-img-overlay">
+                    <h3>Freshy<br> citronnade</h3>
+                    <a href="#" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container-fluid">
+        <h1 class="title text-center fw-bold mt-5" style="font-size: 28px;">A propos de nous</h1>
+    </div>
+    <section class="about-section container-fluid">
+        <div class="row align-items-center justify-content-center g-4" style="gap: 63px;">
+            <div class="col-12 col-lg-6 text-content">
+                <p style="margin-bottom: 21px;">Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                    pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit
+                    anim id est laborum.</p>
+
+                <p style="margin-bottom: 21px;">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+                    tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                    voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                    non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+            </div>
+            <div class="col-12 col-lg-6 image-content">
+                <img src="images/A propos.png" alt="À propos de Freshy" class="img-fluid">
+            </div>
+        </div>
+    </section>
+
+    <!--Section engagement-->
+
+    <section class="section-engagement container-fluid py-5">
+        <div class="title-p text-center mb-5">
+            <h1>Nos engagements </h1>
+            <p>Avec Freshy Industrie, retrouver une vie facile et saine </p>
+        </div>
+        <div class="row circular-section justify-content-center g-4">
+            <div class="col-12 col-sm-6 col-lg-3 circular-item text-center">
+                <div class="circular-image-container mx-auto">
+                    <img src="images/Group.png" alt="Description 1">
+                </div>
+                <h3 style="width: 250px; height: 60px; font-size: 20px; font-weight: 500; line-height: 30px;">Gagnez du
+                    temps en cuisine</h3>
+                <p>Nos produits sont faits spécialement, pour vous aider à ne pas perdre du temps en cuisine. Plus vous
+                    adoptez Freshy, plus vous allez vite</p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 circular-item text-center">
+                <div class="circular-image-container mx-auto">
+                    <img src="images/Object.png" alt="Description 2">
+                </div>
+                <h3 style="font-size: 20px; line-height: 30px; width: 241px; height: 90px;">Consommez des produits bio
+                    sans additifs</h3>
+                <p>Nos produits sont faits spécialement, pour vous aider à ne pas perdre du temps en cuisine. Plus vous
+                    adoptez Freshy, plus vous allez vite</p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 circular-item text-center">
+                <div class="circular-image-container mx-auto">
+                    <img src="images/Group 1.png" alt="Description 3">
+                </div>
+                <h3 style="width: 250px; font-size: 20px; line-height: 30px">Economisez de l'argent en consommant les
+                    produits Freshy</h3>
+                <p>Nos produits sont faits spécialement, pour vous aider à ne pas perdre du temps en cuisine. Plus vous
+                    adoptez Freshy, plus vous allez vite</p>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 circular-item text-center">
+                <div class="circular-image-container mx-auto">
+                    <img src="images/gagner.png" alt="Description 4">
+                </div>
+                <h3 style="width: 250px; font-size: 20px; line-height: 30px">Gagnez de l'argent en devenant un
+                    distributeur</h3>
+                <p>Nos produits sont faits spécialement, pour vous aider à ne pas perdre du temps en cuisine. Plus vous
+                    adoptez Freshy, plus vous allez vite</p>
+            </div>
+        </div>
+    </section>
+
+    <!--Section produits populaires-->
+    <section class="section-container-dark container-fluid py-5">
+        <h1 class="text-center mb-5" style="color: black;">Nos produits les plus populaires</h1>
+        <div class="row product-grid-dark justify-content-center g-4">
+            <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
+                <img src="images/citronnade-montage 2.png" alt="Freshy Citronnade" class="img-fluid"
+                    style="width:279px; height: 203px;">
+                <h3> La citronnade</h3>
+                <a href="#" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
+                <img src="images/huile-pop .png" alt="Huile Palmiste" class="img-fluid"
+                    style="width: 283px;height: 283px;margin-bottom: -66px;">
+                <h3>Huile Palmiste</h3>
+                <a href="#" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
+                <img src="images/huile-pop .png" alt="Huile de Palme" class="img-fluid"
+                    style="width: 283px;height: 283px;margin-bottom: -66px;">
+                <h3>Huile de Palme</h3>
+                <a href="#" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
+                <img src="images/Group 2.png" alt="Crème concentrée de noix de palme" class="img-fluid"
+                    style="width:266px; height: 282px; margin-bottom: -64px;">
+                <h3>Crème concentrée de noix de palme</h3>
+                <a href="#" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!--Section produits dérivés-->
+    <div class="container">
+        <section class="section-container">
+            <h2 class="section-title">Nos produits dérivés</h2>
+            <p class="section-description">
+                Nous mettons à votre disposition les produits issus des transformations
+                des matières premières pour vos divers besoins et utilisations
+            </p>
+            <div class="product-grid row g-4 justify-content-center">
+                <div class="col-12 col-sm-6 col-md-3 product-card">
+                    <img src="Rectangle 50.png" alt="Tourteau de palmiste" class="img-fluid">
+                    <p>Tourteau de palmiste</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 product-card">
+                    <img src="Rectangle 51.png" alt="Fibres de l'amande du noix de palme (KPLÉBÉ)" class="img-fluid">
+                    <p>Fibres de noix de palme (KPLÊBÊ)</p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 product-card">
+                    <img src="Rectangle 52.png" alt="Rafles de fruits vide du noix de palme" class="img-fluid">
+                    <p>Rafles vide du noix de palme </p>
+                </div>
+                <div class="col-12 col-sm-6 col-md-3 product-card">
+                    <img src="Rectangle 53.png" alt="Coque de noix de palme" class="img-fluid">
+                    <p>Coques de noix de<br> palme</p>
+                </div>
+            </div>
+            <a href="#" class="btn-reserve">Réserver votre commande</a>
+        </section>
+    </div>
+
+    <!--Section CTA-->
+    <div class="container-fluid px-0">
+        <section class="cta-section">
+            <div class="cta-content">
+                <h2 class="cta-content-h2">Prêt à ajouter un nouveau produit à votre activité, et augmenter vos revenus
+                    ?
+                </h2>
+                <a href="devis.html" class="btn-quote-cta">Demander un devis <i class="fas fa-arrow-right"></i></a>
+            </div>
+            <div class="cta-image-container">
+                <img src="images/Frame 21 (2).png" alt="Image de la section CTA" class="cta-actual-image">
+                <div class="cta-image-overlay"></div>
+            </div>
+        </section>
+    </div>
+
+    <!--Section Articles-->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <section class="articles-section">
+                    <h1 class="text-center mb-5"
+                        style="font-size: 28px; font-weight: 700; line-height: 42px; font-family: 'Poppins';">Nos
+                        derniers conseils et guides</h1>
+                    <div class="row articles-grid g-4 justify-content-center">
+                        <div class="col-12 col-md-6 col-lg-4 article-card">
+                            <img src="Rectangle 48.png" alt="Image article" class="img-fluid">
+                            <div class="article-content">
+                                <p class="article-info"><span>07 AVR 2025</span> <span>|</span> <span>Freshy Palm</span>
+                                </p>
+                                <h3
+                                    style="color: #000000; color: #000000; max-width: 385px; font-size: 17px; line-height: 30px; font-weight: 500;">
+                                    Comment faire la sauce graine sans salir toute la cuisine?</h3>
+                                <div style="font-size: 13px; text-align: justify;">Lorem ipsum dolor sit amet
+                                    consectetur. Dui urna et quis interdum eu proin lectus. Consectetur adipiscing
+                                    consectetur lacus duis in turpis at quis. Ti</div>
+                                <a href="#" class="btn-read-article">Lire l'article <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 article-card">
+                            <img src="Rectangle 48.png" alt="Image article" class="img-fluid">
+                            <div class="article-content">
+                                <p class="article-info"><span>07 AVR 2025</span> <span>|</span> <span>Freshy Palm</span>
+                                </p>
+                                <h3
+                                    style="color: #000000; max-width: 385px; font-size: 17px; line-height: 30px; font-weight: 500;">
+                                    Comment faire la sauce graine sans salir toute la cuisine?</h3>
+                                <div style="font-size: 13px; text-align: justify;">Lorem ipsum dolor sit amet
+                                    consectetur. Dui urna et quis interdum eu proin lectus. Consectetur adipiscing
+                                    consectetur lacus duis in turpis at quis. Ti</div>
+                                <a href="#" class="btn-read-article">Lire l'article <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6 col-lg-4 article-card">
+                            <img src="Rectangle 48.png" alt="Image article" class="img-fluid">
+                            <div class="article-content">
+                                <p class="article-info"><span>07 AVR 2025</span> <span>|</span> <span>Freshy Palm</span>
+                                </p>
+                                <h3
+                                    style="color: #000000; max-width: 385px; font-size: 17px; line-height: 30px; font-weight: 500;">
+                                    Comment faire la sauce graine sans salir toute la cuisine?</h3>
+                                <div style="font-size: 13px; text-align: justify;">Lorem ipsum dolor sit amet
+                                    consectetur. Dui urna et quis interdum eu proin lectus. Consectetur adipiscing
+                                    consectetur lacus duis in turpis at quis. Ti</div>
+                                <a href="#" class="btn-read-article">Lire l'article <i
+                                        class="fas fa-arrow-right"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="text-center mt-4">
+                        <a href="#" class="view-all-articles">Voir tous les articles <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Article Detail Page -->
+        <div class="container article-detail-page" style="display: none;">
+            <a href="#" class="back-link"><i class="fas fa-arrow-left"></i> Retour</a>
+
+            <h1 class="article-title">Comment faire la sauce graine sans salir toute la cuisine?</h1>
+            <p class="article-meta">07 Avril 2025 | Publier par Freshy Palm</p>
+
+            <img src="images/Rectangle 48.png" alt="Image principale de l'article" class="article-main-image">
+
+            <div class="article-intro">
+                <p>Cet éclairage analyse les récentes évolutions législatives, les risques associés et les stratégies à
+                    adopter pour les entreprises et les professionnels. Découvrez nos recommandations pour anticiper les
+                    défis et sécuriser vos pratiques dans un environnement juridique complexe.</p>
+            </div>
+
+            <div class="article-content">
+                <p>Lorem ipsum dolor sit amet consectetur. Dui at vulputate hendrerit at ultrices proin. Enim maecenas
+                    volutpat pellentesque pretium magnis arcu pulvinar sodales maecenas. Dignissim porttitor iaculis ut
+                    leo
+                    venenatis sed faucibus.</p>
+                <p>Lorem ipsum dolor sit amet consectetur. Dui at vulputate hendrerit at ultrices proin. Enim maecenas
+                    volutpat pellentesque pretium magnis arcu pulvinar sodales maecenas. Dignissim porttitor iaculis ut
+                    leo
+                    venenatis sed faucibus.</p>
+            </div>
+
+            <div class="share-section">
+                <p>Partager sur :</p>
+                <a href="#" class="share-button share-facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
+                <a href="#" class="share-button share-x"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="#" class="share-button share-whatsapp"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="#" class="share-button share-linkedin" style=" background-color: #007bb5; "><i
+                        class="fab fa-linkedin-in"></i> LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Related Articles Carousel -->
+        <section class="carousel-section related-articles-carousel" style="display: none;">
+            <div class="carousel-header">
+                <h2>Vous aimeriez lire aussi</h2>
+                <div class="carousel-navigation">
+                    <div class="carousel-arrow prev-arrow"><i class="fas fa-chevron-left"></i></div>
+                    <div class="carousel-arrow next-arrow"><i class="fas fa-chevron-right"></i></div>
+                </div>
+            </div>
+            <div class="carousel-container">
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+                <div class="article-carousel-card">
+                    <img src="images/Rectangle 48.png" alt="Image article">
+                    <div class="article-carousel-content">
+                        <p class="article-carousel-info"><span>07 AVR 2025</span> | <span>Freshy Palm</span></p>
+                        <h3 class="article-carousel-title">Comment faire la sauce graine sans salir toute la cuisine?
+                        </h3>
+                        <p class="article-carousel-description">Lorem ipsum dolor sit amet consectetur. Dui urna et quis
+                            interdum eu proin lectus. Consectetur adipiscing consectetur lacus d.</p>
+                        <a href="#" class="btn-read-carousel-article">Lire l'article <i
+                                class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!--Section Newsletter-->
+        <div class="container">
+            <section class="newsletter-section">
+                <div class="newsletter-text">
+                    <p>Pour ne rien manquer de nos conseils et guides, ainsi que
+                        de nos dernières nouveautés, connectez-vous à notre
+                        newsletters</p>
+                </div>
+                <div class="newsletter-form">
+                    <input type="email" placeholder="Entrez votre email" class="newsletter-input">
+                    <button type="submit">S'inscrire</button>
+                </div>
+                
+            </section>
+        </div>
+        <!--Section footers-->
+        <footer class="footer-section">
+            <div class="footer-logo-container">
+                <img src="images/logo_freshy.png" alt="Freshy Industries Logo" class="footer-logo">
+            </div>
+            <div class="footer-sitemap">
+                <div class="sitemap-column">
+                    <h3>Plan du site</h3>
+                    <ul>
+                        <li><a href="index.html">Accueil</a></li>
+                        <li><a href="#">Nos marques</a></li>
+                        <li><a href="#">Nos produits</a></li>
+                        <li><a href="#">Epicerie du terroir</a></li>
+                        <li><a href="actualite.html">Actualités</a></li>
+                    </ul>
+                </div>
+                <div class="sitemap-column">
+                    <h3 style="visibility: hidden;">Sous-catégories</h3> <!-- Titre caché pour l'alignement -->
+                    <ul>
+                        <li><a href="freshy_palm_page.html">Freshy Palm</a></li>
+                        <li><a href="freshy_fruit_boosté.html">Freshy Fruit boosté</a></li>
+                        <li><a href="#">Les dérivés de la production</a></li>
+                        <li><a href="actualite.html">Conseils et guide</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-buy-section">
+                <h3>Où acheter ?</h3>
+                <p>Vous souhaitez vous procurer les produits de Freshy industries pour votre consommation</p>
+                <a href="point_vente.html" class="btn-points-vente">Nos points de vente</a>
+            </div>
+        </footer>
+
+        <script>
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) { // Ajoutez l'ombre après 50px de défilement
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const articlesSection = document.querySelector('.articles-section');
+                const articleDetailPage = document.querySelector('.article-detail-page');
+                const relatedArticlesCarousel = document.querySelector('.related-articles-carousel');
+                const backLink = articleDetailPage.querySelector('.back-link');
+
+                document.querySelectorAll('.articles-section .btn-read-article').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        articlesSection.style.display = 'none';
+                        articleDetailPage.style.display = 'block';
+                        relatedArticlesCarousel.style.display = 'block';
+                    });
+                });
+
+                backLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    articleDetailPage.style.display = 'none';
+                    relatedArticlesCarousel.style.display = 'none';
+                    articlesSection.style.display = 'block';
+                });
+
+                // Carousel functionality
+                const carouselContainer = document.querySelector('.carousel-container');
+                const prevArrow = document.querySelector('.prev-arrow');
+                const nextArrow = document.querySelector('.next-arrow');
+
+                if (carouselContainer && prevArrow && nextArrow) {
+                    nextArrow.addEventListener('click', () => {
+                        carouselContainer.scrollBy({ left: carouselContainer.offsetWidth, behavior: 'smooth' });
+                    });
+
+                    prevArrow.addEventListener('click', () => {
+                        carouselContainer.scrollBy({ left: -carouselContainer.offsetWidth, behavior: 'smooth' });
+                    });
+                }
+            });
+
+            // Menu burger functionality
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const closeBtn = document.getElementById('closeBtn');
+            const navLinks = document.querySelector('.nav-links');
+            const sidebarDropdowns = document.querySelectorAll('.sidebar-dropdown .dropdown-toggle');
+
+            // Open sidebar
+            function openSidebar() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                menuToggle.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Changer l'icône en croix
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            }
+
+            // Close sidebar
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+
+                // Remettre l'icône en barres
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+
+            // Toggle sidebar on burger click
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    if (sidebar.classList.contains('active')) {
+                        closeSidebar();
+                    } else {
+                        openSidebar();
+                    }
+                });
+            }
+
+            // Close sidebar when clicking close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking overlay
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+                    closeSidebar();
+                }
+            });
+
+            // Sidebar dropdown functionality
+            sidebarDropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const parent = dropdown.parentElement;
+                    const dropdownContent = parent.querySelector('.sidebar-dropdown-content');
+
+                    parent.classList.toggle('active');
+
+                    if (parent.classList.contains('active')) {
+                        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+                    } else {
+                        dropdownContent.style.maxHeight = '0';
+                    }
+                });
+            });
+
+            // Set active link based on current page
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Toggle nav-links for old menu (compatibility)
+            if (navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        </script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

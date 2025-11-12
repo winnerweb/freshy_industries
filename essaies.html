@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Freshy Industries</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body,
+p {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', sans-serif;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 1440px;
+    max-width: 100vw;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 80px;
+    background-color: #fff;
+    box-shadow: none;
+    transition: box-shadow 0.3s ease;
+    height: 88px;
+}
+
+.navbar.scrolled {
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    /* Ombre légère au défilement */
+}
+
+.navbar-logo {
+    height: 74px;
+    /* Ajustez selon la taille de votre logo */
+}
+
+.navbar-center {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    flex: 1;
+    justify-content: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    right: -33px;
+}
+
+.nav-links li {
+    margin-right: 25px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    padding-bottom: 5px;
+    position: relative;
+    font-size: 14px;
+}
+
+.nav-links a.active,
+.nav-links a:hover {
+    color: #8EC03B;
+    /* Couleur verte pour actif/survol */
+}
+
+.nav-links a.active::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #8EC03B;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    width: 260px;
+    box-shadow: 0px 0px 4px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1050;
+    top: 113%;
+    margin-top: 5px;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.nav-icon {
+    text-decoration: none;
+    color: #333;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.nav-icon:hover {
+    color: #8EC03B;
+}
+
+.btn-quote {
+    background-color: #C24D98;
+    color: white;
+    padding: 5px 6px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
+    font-weight: 500;
+    font-family: 'Poppins', sans-serif;
+    width: 143px;
+    height: 30px;
+}
+
+.btn-quote:hover {
+    background-color: #a33f7f;
+    /* Couleur de survol */
+}
+
+/* Pour ajuster la flèche Font Awesome */
+.nav-links .dropdown .fas.fa-chevron-down {
+    margin-left: 5px;
+    font-size: 0.8em;
+    /* Ajuste la taille de la flèche si nécessaire */
+}
+
+.dropdown-content a {
+    color: #333;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+    border-bottom: 1px solid #eee;
+    /* Ligne de séparation */
+}
+
+.dropdown-content a:hover {
+    background-color: #8EC03B;
+    color: #fff;
+}
+
+.dropdown-icon {
+    transition: transform 0.3s ease;
+    /* Animation de rotation douce */
+}
+
+.dropdown:hover .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+.dropdown-parent-active .dropdown-icon {
+    transform: rotate(180deg);
+}
+
+/* Menu Burger avec icône Font Awesome */
+.menu-toggle {
+    display: none;
+    cursor: pointer;
+    z-index: 1001;
+    transition: all 0.3s ease;
+}
+
+.menu-toggle i {
+    font-size: 28px;
+    color: #333;
+    transition: all 0.3s ease;
+}
+
+
+.menu-toggle.active i {
+    color: #C24D98;
+    transform: rotate(90deg);
+}
+
+/* Overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(2px);
+}
+
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Sidebar */
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100%;
+    background-color: #fff;
+    z-index: 1000;
+    box-shadow: 2px 0 15px rgba(0, 0, 0, 0.2);
+    transition: left 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    overflow-y: auto;
+}
+
+.sidebar.active {
+    left: 0;
+}
+
+/* Bouton fermer */
+.close-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #333;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background-color: #f0f0f0;
+    color: #C24D98;
+    transform: rotate(90deg);
+}
+
+/* Navigation sidebar */
+.sidebar-nav {
+    padding: 80px 30px 30px;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav>ul>li {
+    margin-bottom: 5px;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 15px 20px;
+    color: #333;
+    text-decoration: none;
+    font-weight: 500;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+/* Effets hover */
+.sidebar-nav a:hover {
+    background-color: #f0f0f0;
+    color: #8EC03B;
+    padding-left: 25px;
+    transform: translateX(5px);
+}
+
+/* États actifs */
+.sidebar-link.active {
+    background-color: #8EC03B;
+    color: white !important;
+}
+
+.sidebar-link.active::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 4px;
+    height: 100%;
+    background-color: #C24D98;
+    border-radius: 0 4px 4px 0;
+}
+
+.sidebar-link.active:hover {
+    background-color: #7ab02f;
+    color: white !important;
+}
+
+/* Sidebar dropdown */
+.sidebar-dropdown {
+    position: relative;
+}
+
+.sidebar-dropdown .dropdown-toggle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-dropdown .dropdown-toggle i {
+    transition: transform 0.3s ease;
+    font-size: 0.8em;
+}
+
+.sidebar-dropdown.active .dropdown-toggle i {
+    transform: rotate(180deg);
+}
+
+.sidebar-dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.4s ease;
+    padding-left: 20px;
+}
+
+.sidebar-dropdown-content li {
+    margin: 0;
+}
+
+.sidebar-dropdown-content a {
+    padding: 12px 20px;
+    font-size: 0.95em;
+    color: #666;
+}
+
+.sidebar-dropdown-content a:hover {
+    color: #8EC03B;
+    background-color: #f9f9f9;
+}
+
+/* Sidebar CTA button */
+.sidebar-cta {
+    background-color: #C24D98 !important;
+    color: white !important;
+    text-align: center;
+    margin-top: 20px;
+    font-weight: 600;
+}
+
+.sidebar-cta:hover {
+    background-color: #a33f7f !important;
+    color: white !important;
+    transform: translateX(5px);
+}
+
+/* Sidebar icon */
+.sidebar-icon {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar-icon i {
+    font-size: 1.1em;
+}
+
+/* Styles for article detail page and carousel */
+
+
+
+/* Media query pour les mobiles (< 600px) */
+@media (max-width: 599px) {
+    .navbar {
+        padding: 15px 20px;
+    }
+
+    .navbar-logo {
+        height: 50px;
+    }
+
+    /* Masquer le menu desktop */
+    .navbar-center {
+        display: none !important;
+    }
+
+    /* Afficher le menu burger */
+    .menu-toggle {
+        display: block;
+    }
+
+    /* Sidebar responsive pour mobiles */
+    .sidebar {
+        width: 85%;
+        max-width: 300px;
+        left: -100%;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-nav {
+        padding: 70px 20px 20px;
+    }
+
+    .sidebar-nav a {
+        padding: 12px 15px;
+        font-size: 0.95em;
+    }
+
+    .close-btn {
+        top: 15px;
+        right: 15px;
+        width: 35px;
+        height: 35px;
+        font-size: 20px;
+    }
+
+    .menu-toggle i {
+        font-size: 24px;
+    }
+}
+
+/* Media query pour les très grands écrans (> 1080px) */
+@media (min-width: 1081px) {
+
+    /* S'assurer que la sidebar et l'overlay sont cachés sur desktop */
+    .sidebar,
+    .overlay {
+        display: none !important;
+    }
+}
+
+/*section a propos - Bootstrap gère la responsivité */
+
+
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-left" style="margin-left: -24px;">
+            <a href="index.html"><img src="images/logo_freshy.png" alt="Freshy Industries Logo" class="navbar-logo"></a>
+        </div>
+
+        <div class="navbar-center">
+            <ul class="nav-links">
+                <li><a href="index.html" class="active">Accueil</a></li>
+                <li class="dropdown">
+                    <a href="#">Nos marques et produits <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <div class="dropdown-content">
+                        <a href="freshy_palm_page.html">Freshy Palm</a>
+                        <a href="freshy_fruit_boosté.html">Freshy le Fruit Boosté</a>
+                    </div>
+                </li>
+                <li><a href="#">Épicerie du terroir</a></li>
+                <li><a href="actualite.html">Actualités</a></li>
+                <li><a href="point_vente.html">Points de Vente</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <div class="navbar-right">
+                <a href="#" class="nav-icon">Panier <i class="fas fa-shopping-bag"></i></a>
+                <a href="#" class="nav-icon"><i class="fas fa-search"></i></a>
+                <button class="btn-quote"><a href="devis.html"
+                        style="text-decoration: none; color: white; text-decoration: none; color: white; font-size: 12px; font-family: 'Poppins'; display: flex; align-items: center; justify-content: center;">Demander
+                        un
+                        devis</a></button>
+            </div>
+        </div>
+
+        <div class="menu-toggle" id="menuToggle">
+            <i class="fa-solid fa-bars"></i>
+        </div>
+    </nav>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <button class="close-btn" id="closeBtn">
+            <i class="fas fa-times"></i>
+        </button>
+        <nav class="sidebar-nav">
+            <ul>
+                <li><a href="index.html" class="sidebar-link">Accueil</a></li>
+                <li class="sidebar-dropdown">
+                    <a href="#" class="dropdown-toggle">Nos marques et produits <i class="fas fa-chevron-down"></i></a>
+                    <ul class="sidebar-dropdown-content">
+                        <li><a href="freshy_palm_page.html">Freshy Palm</a></li>
+                        <li><a href="freshy_fruit_boosté.html">Freshy le Fruit Boosté</a></li>
+                    </ul>
+                </li>
+                <li><a href="#" class="sidebar-link">Épicerie du terroir</a></li>
+                <li><a href="actualite.html" class="sidebar-link">Actualités</a></li>
+                <li><a href="point_vente.html" class="sidebar-link">Points de Vente</a></li>
+                <li><a href="contact.html" class="sidebar-link">Contact</a></li>
+                <li><a href="#" class="sidebar-icon">Panier <i class="fas fa-shopping-bag"></i></a></li>
+                <li><a href="devis.html" class="sidebar-cta">Demander un devis</a></li>
+            </ul>
+        </nav>
+    </div>
+
+    
+
+        <script>
+            window.addEventListener('scroll', function () {
+                const navbar = document.querySelector('.navbar');
+                if (window.scrollY > 50) { // Ajoutez l'ombre après 50px de défilement
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            document.addEventListener('DOMContentLoaded', () => {
+                const articlesSection = document.querySelector('.articles-section');
+                const articleDetailPage = document.querySelector('.article-detail-page');
+                const relatedArticlesCarousel = document.querySelector('.related-articles-carousel');
+                const backLink = articleDetailPage.querySelector('.back-link');
+
+                document.querySelectorAll('.articles-section .btn-read-article').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        articlesSection.style.display = 'none';
+                        articleDetailPage.style.display = 'block';
+                        relatedArticlesCarousel.style.display = 'block';
+                    });
+                });
+
+                backLink.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    articleDetailPage.style.display = 'none';
+                    relatedArticlesCarousel.style.display = 'none';
+                    articlesSection.style.display = 'block';
+                });
+
+                // Carousel functionality
+                const carouselContainer = document.querySelector('.carousel-container');
+                const prevArrow = document.querySelector('.prev-arrow');
+                const nextArrow = document.querySelector('.next-arrow');
+
+                if (carouselContainer && prevArrow && nextArrow) {
+                    nextArrow.addEventListener('click', () => {
+                        carouselContainer.scrollBy({ left: carouselContainer.offsetWidth, behavior: 'smooth' });
+                    });
+
+                    prevArrow.addEventListener('click', () => {
+                        carouselContainer.scrollBy({ left: -carouselContainer.offsetWidth, behavior: 'smooth' });
+                    });
+                }
+            });
+
+            // Menu burger functionality
+            const menuToggle = document.getElementById('menuToggle');
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const closeBtn = document.getElementById('closeBtn');
+            const navLinks = document.querySelector('.nav-links');
+            const sidebarDropdowns = document.querySelectorAll('.sidebar-dropdown .dropdown-toggle');
+
+            // Open sidebar
+            function openSidebar() {
+                sidebar.classList.add('active');
+                overlay.classList.add('active');
+                menuToggle.classList.add('active');
+                document.body.style.overflow = 'hidden';
+
+                // Changer l'icône en croix
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-bars');
+                    icon.classList.add('fa-times');
+                }
+            }
+
+            // Close sidebar
+            function closeSidebar() {
+                sidebar.classList.remove('active');
+                overlay.classList.remove('active');
+                menuToggle.classList.remove('active');
+                document.body.style.overflow = '';
+
+                // Remettre l'icône en barres
+                const icon = menuToggle.querySelector('i');
+                if (icon) {
+                    icon.classList.remove('fa-times');
+                    icon.classList.add('fa-bars');
+                }
+            }
+
+            // Toggle sidebar on burger click
+            if (menuToggle) {
+                menuToggle.addEventListener('click', () => {
+                    if (sidebar.classList.contains('active')) {
+                        closeSidebar();
+                    } else {
+                        openSidebar();
+                    }
+                });
+            }
+
+            // Close sidebar when clicking close button
+            if (closeBtn) {
+                closeBtn.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar when clicking overlay
+            if (overlay) {
+                overlay.addEventListener('click', closeSidebar);
+            }
+
+            // Close sidebar with Escape key
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && sidebar && sidebar.classList.contains('active')) {
+                    closeSidebar();
+                }
+            });
+
+            // Sidebar dropdown functionality
+            sidebarDropdowns.forEach(dropdown => {
+                dropdown.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const parent = dropdown.parentElement;
+                    const dropdownContent = parent.querySelector('.sidebar-dropdown-content');
+
+                    parent.classList.toggle('active');
+
+                    if (parent.classList.contains('active')) {
+                        dropdownContent.style.maxHeight = dropdownContent.scrollHeight + 'px';
+                    } else {
+                        dropdownContent.style.maxHeight = '0';
+                    }
+                });
+            });
+
+            // Set active link based on current page
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Toggle nav-links for old menu (compatibility)
+            if (navLinks) {
+                menuToggle.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
+            }
+        </script>
+
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
