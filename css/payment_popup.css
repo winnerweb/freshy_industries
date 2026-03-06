@@ -1,0 +1,133 @@
+:root {
+  --payment-accent: #1ca95b;
+  --payment-danger: #d84b4b;
+  --payment-bg: #f4f6fb;
+  --payment-text: #0f172a;
+  --payment-muted: #64748b;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body.payment-page {
+  margin: 0;
+  min-height: 100vh;
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at 20% 10%, #ffffff, var(--payment-bg));
+  display: grid;
+  place-items: center;
+  color: var(--payment-text);
+}
+
+.payment-popup {
+  width: min(360px, calc(100vw - 28px));
+  border-radius: 24px;
+  background: #ffffff;
+  box-shadow: 0 26px 60px rgba(15, 23, 42, 0.16);
+  padding: 28px 24px 24px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  animation: popup-in 260ms ease-out;
+}
+
+.payment-confetti {
+  position: absolute;
+  inset: 0 auto auto 0;
+  width: 100%;
+  pointer-events: none;
+}
+
+.payment-confetti span {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  opacity: 0.92;
+  animation: drift 2.2s ease-in-out infinite;
+}
+
+.payment-icon-wrap {
+  width: 92px;
+  height: 92px;
+  margin: 6px auto 12px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: rgba(28, 169, 91, 0.13);
+}
+
+.payment-icon-wrap.is-failed {
+  background: rgba(216, 75, 75, 0.12);
+}
+
+.payment-icon {
+  font-size: 36px;
+  color: var(--payment-accent);
+}
+
+.payment-icon.is-failed {
+  color: var(--payment-danger);
+}
+
+.payment-title {
+  margin: 0 0 8px;
+  font-size: 24px;
+  line-height: 1.2;
+  font-weight: 700;
+}
+
+.payment-message {
+  margin: 0;
+  color: var(--payment-muted);
+  font-size: 14px;
+}
+
+.payment-order {
+  margin: 10px 0 0;
+  color: var(--payment-muted);
+  font-size: 13px;
+}
+
+.payment-cta {
+  margin-top: 18px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 180px;
+  height: 44px;
+  border-radius: 999px;
+  border: 0;
+  text-decoration: none;
+  color: #fff;
+  background: var(--payment-accent);
+  font-weight: 600;
+  transition: transform 180ms ease, box-shadow 180ms ease;
+  box-shadow: 0 10px 22px rgba(28, 169, 91, 0.35);
+}
+
+.payment-cta.is-failed {
+  background: var(--payment-danger);
+  box-shadow: 0 10px 22px rgba(216, 75, 75, 0.35);
+}
+
+.payment-cta:hover {
+  transform: translateY(-1px);
+}
+
+@keyframes popup-in {
+  from {
+    transform: translateY(14px) scale(0.96);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes drift {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(8px) rotate(15deg); }
+}

@@ -1,0 +1,41 @@
+<?php return array(
+    'root' => array(
+        'name' => '__root__',
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => 'a9f3523b0b5d2bcedc7ade1369f9314429aa41a7',
+        'type' => 'library',
+        'install_path' => __DIR__ . '/../../',
+        'aliases' => array(),
+        'dev' => true,
+    ),
+    'versions' => array(
+        '__root__' => array(
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => 'a9f3523b0b5d2bcedc7ade1369f9314429aa41a7',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../../',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'fedapay/fedapay-php' => array(
+            'pretty_version' => '0.4.7',
+            'version' => '0.4.7.0',
+            'reference' => '150c196ae7778b10ab04dc82cd882cf1a3c332ce',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../fedapay/fedapay-php',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'phpmailer/phpmailer' => array(
+            'pretty_version' => 'v6.9.0',
+            'version' => '6.9.0.0',
+            'reference' => '934f852bfa68e59476023626461fed0c8ed6d052',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../phpmailer/phpmailer',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+    ),
+);
