@@ -12,20 +12,20 @@ include 'includes/header.php';
 
     </section>
 
-    <!-- Contenu spÃ©cifique Ã  la page Freshy Palm sera ajoutÃ© ici -->
+    <!-- Contenu specifique a la page Freshy Palm -->
 
     <section class="text-section freshy-palm-page">
         <p>Freshy palm est une marque de Freshy industrie qui vous propose trois gammes de
-            produits pour la consommation. Nous disposons de la crÃ¨me concentrÃ©e de noix de
+            produits pour la consommation. Nous disposons de la crème concentrée de noix de
             palme, de l'huile palmiste, et de l'huile de palme.</p>
     </section>
 
     <section class="product-detail-section freshy-palm-page">
         <div class="product-image-container">
-            <img src="images/concentre_palm.webp" alt="CrÃ¨me concentrÃ©e de noix de palme">
+            <img src="images/concentre_palm.webp" alt="Crème concentrée de noix de palme">
         </div>
         <div class="product-info-content">
-            <h2>CrÃ¨me concentrÃ©e de noix de palme</h2>
+            <h2>Crème concentrée de noix de palme</h2>
             <p>Lorem ipsum dolor sit amet consectetur. Dui at vulputate hendrerit at ultrices proin. Enim maecenas
                 volutpat pellentesque pretium magnis arcu pulvinar sodales maecenas. Dignissim porttitor iaculis ut leo
                 venenatis sed faucibus.</p>

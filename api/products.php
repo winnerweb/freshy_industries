@@ -8,10 +8,12 @@ try {
     $pdo = db();
     $minimal = (string) ($_GET['minimal'] ?? '') === '1';
     if ($minimal) {
+        $hasStatus = columnExists($pdo, 'products', 'status');
+        $where = $hasStatus ? "WHERE status = 'active'" : '';
         $stmt = $pdo->query(
             "SELECT id, name
              FROM products
-             WHERE status = 'active'
+             $where
              ORDER BY name ASC"
         );
         jsonResponse(['data' => $stmt->fetchAll()]);

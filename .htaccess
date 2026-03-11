@@ -1,0 +1,13 @@
+RewriteEngine On
+
+# Force UTF-8 for all text-based assets to avoid mojibake (e.g. "Payer •").
+AddDefaultCharset UTF-8
+AddCharset UTF-8 .html .htm .php .css .js .json .svg .xml .txt
+
+# Keep existing files/directories untouched.
+RewriteCond %{REQUEST_FILENAME} -f [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule ^ - [L]
+
+# Resolve legacy/mis-encoded PHP URLs to canonical ASCII URLs.
+RewriteRule ^(.+\.php)$ legacy_url_resolver.php?path=$1 [L,QSA]

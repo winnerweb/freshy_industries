@@ -28,7 +28,7 @@ include 'includes/header.php';
                     <img src="images/huile_overlay_accueil.webp" alt="Image du produit" style="position: relative; top: -63px;"
                         class="product-img-overlay">
                     <h3>Huile Palmiste <br> Huile de Palme</h3>
-                    <a href="freshy_fruit_boosté.php" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
+                    <a href="freshy_fruit_boost.php" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
             <div class="category-card" style="background-image: url('images/citronnade_accueil.webp');">
@@ -41,7 +41,7 @@ include 'includes/header.php';
                     <img src="images/citronnade_booste.webp" alt="Image du produit"
                         style="position: relative; top: -49px;" class="product-img-overlay">
                     <h3>Freshy<br> citronnade</h3>
-                    <a href="freshy_fruit_boosté.php" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
+                    <a href="freshy_fruit_boost.php" class="btn-discover-overlay">Découvrir <i class="fas fa-arrow-right"></i></a>
                 </div>
             </div>
 
@@ -145,19 +145,19 @@ include 'includes/header.php';
                 <img src="images/citronnade_booste.webp" alt="Freshy Citronnade" class="img-fluid"
                     style="width:279px; height: 203px;">
                 <h3> La citronnade</h3>
-                <a href="freshy_fruit_boosté.php" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                <a href="freshy_fruit_boost.php" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
                 <img src="images/huile_epicerie.webp" alt="Huile Palmiste" class="img-fluid"
                     style="width: 283px;height: 283px;margin-bottom: -66px;">
                 <h3>Huile Palmiste</h3>
-                <a href="freshy_fruit_boosté.php" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                <a href="freshy_fruit_boost.php" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
                 <img src="images/huile_epicerie.webp" alt="Huile de Palme" class="img-fluid"
                     style="width: 283px;height: 283px;margin-bottom: -66px;">
                 <h3>Huile de Palme</h3>
-                <a href="freshy_fruit_boosté.php" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
+                <a href="freshy_fruit_boost.php" class="btn-discover-dark">En savoir plus <i class="fas fa-arrow-right"></i></a>
             </div>
             <div class="col-12 col-sm-6 col-lg-3 product-card-dark">
                 <img src="images/concentre_palm.webp" alt="Crème concentrée de noix de palme" class="img-fluid"

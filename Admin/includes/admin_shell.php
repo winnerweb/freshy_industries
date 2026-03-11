@@ -63,6 +63,35 @@ if (!function_exists('adminUserInitials')) {
     }
 }
 
+if (!function_exists('adminPublicUrl')) {
+    function adminPublicUrl(string $value): string
+    {
+        $raw = trim($value);
+        if ($raw === '') {
+            return '';
+        }
+        if (preg_match('#^(https?:)?//#i', $raw)) {
+            return $raw;
+        }
+
+        $siteBase = rtrim((string) SITE_BASE_URL, '/');
+        $path = str_replace('\\', '/', $raw);
+        if ($path[0] !== '/') {
+            return ($siteBase !== '' ? $siteBase : '') . '/' . ltrim($path, '/');
+        }
+
+        // Local env path can be stored in DB; normalize for production root.
+        $path = preg_replace('#^/site_test(?=/)#i', '', $path) ?? $path;
+        if ($siteBase === '') {
+            return $path;
+        }
+        if ($path === $siteBase || str_starts_with($path, $siteBase . '/')) {
+            return $path;
+        }
+        return $siteBase . $path;
+    }
+}
+
 $adminPageTitle = $adminPageTitle ?? 'Admin';
 $adminActiveMenu = $adminActiveMenu ?? 'dashboard';
 $adminContent = $adminContent ?? '';

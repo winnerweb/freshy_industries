@@ -20,7 +20,7 @@ $orderId = trim((string) ($_GET['order_id'] ?? ''));
       <span style="left:28%;top:12%;background:#3b82f6;"></span>
       <span style="left:44%;top:10%;background:#a855f7;"></span>
       <span style="left:62%;top:14%;background:#ef4444;"></span>
-      <span style="left:74%;top:18%;background:#22c55e;"></span>
+      <span style="left:74%;top:18%;background:#83BA3A;"></span>
     </div>
     <div class="payment-icon-wrap">
       <span class="payment-icon" aria-hidden="true">✓</span>
@@ -34,4 +34,5 @@ $orderId = trim((string) ($_GET['order_id'] ?? ''));
   </section>
 </body>
 </html>
+
 

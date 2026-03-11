@@ -54,7 +54,8 @@
     if (!password) return;
     const isPassword = password.type === 'password';
     password.type = isPassword ? 'text' : 'password';
-    passwordToggle.textContent = isPassword ? 'Masquer' : 'Voir';
+    passwordToggle.classList.toggle('is-visible', isPassword);
+    passwordToggle.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
     passwordToggle.setAttribute('aria-label', isPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
   });
 

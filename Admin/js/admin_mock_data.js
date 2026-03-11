@@ -2,13 +2,13 @@
   stats: { ventes: 145, revenus: 4250000, commandes: 312, clients: 97 },
   salesSeries: [12, 19, 14, 23, 17, 28, 31, 26, 32, 29, 35, 40],
   products: [
-    { name: 'CrÃ¨me concentrÃ©e 450g', category: 'CrÃ¨me', price: 1300, stock: 45, status: 'active' },
-    { name: 'CrÃ¨me non concentrÃ©e 450g', category: 'CrÃ¨me', price: 750, stock: 12, status: 'active' },
+    { name: 'Crème concentrée 450g', category: 'Crème', price: 1300, stock: 45, status: 'active' },
+    { name: 'Crème non concentrée 450g', category: 'Crème', price: 750, stock: 12, status: 'active' },
     { name: 'Huile 1L', category: 'Huile', price: 1250, stock: 7, status: 'low' },
     { name: 'Boisson 25cl', category: 'Boisson', price: 200, stock: 0, status: 'inactive' }
   ],
   inventory: [
-    { product: 'CrÃ¨me concentrÃ©e 450g', qty: 45, warehouse: 'Cotonou', status: 'in-stock', updated: '2026-02-15 11:30' },
+    { product: 'Crème concentrée 450g', qty: 45, warehouse: 'Cotonou', status: 'in-stock', updated: '2026-02-15 11:30' },
     { product: 'Huile 1L', qty: 7, warehouse: 'Calavi', status: 'low', updated: '2026-02-16 09:10' },
     { product: 'Boisson 25cl', qty: 0, warehouse: 'Calavi', status: 'out', updated: '2026-02-16 10:25' }
   ],
@@ -28,4 +28,6 @@
     { name: 'Support 1', email: 'support@freshy.local', role: 'Support', status: 'inactive' }
   ]
 };
+
+
 

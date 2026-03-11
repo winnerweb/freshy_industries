@@ -5,8 +5,6 @@ use PHPMailer\PHPMailer\Exception as MailException;
 use PHPMailer\PHPMailer\PHPMailer;
 
 require_once __DIR__ . '/_helpers.php';
-require_once dirname(__DIR__, 2) . '/vendor/autoload.php';
-require_once dirname(__DIR__, 2) . '/config/smtp.php';
 require_once dirname(__DIR__, 2) . '/includes/newsletter.php';
 
 function newsletterCleanHtml(string $html): string
@@ -59,7 +57,7 @@ function newsletterBuildEmailHtml(array $campaign, string $email): string
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>' . $subject . '</title>
 </head>
-<body style="margin:0;padding:0;background:#f8fafc;font-family:'Poppins',sans-serif;color:#0f172a;">
+<body style="margin:0;padding:0;background:#f8fafc;font-family:Poppins,sans-serif;color:#0f172a;">
   <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="padding:20px 12px;">
     <tr>
       <td align="center">
@@ -110,6 +108,18 @@ function newsletterCreateMailer(array $smtp): PHPMailer
     return $mail;
 }
 
+function newsletterResolveValidAdminId(PDO $pdo, array $user): ?int
+{
+    $candidate = (int) ($user['id'] ?? 0);
+    if ($candidate <= 0) {
+        return null;
+    }
+    $stmt = $pdo->prepare('SELECT id FROM admin_users WHERE id = :id LIMIT 1');
+    $stmt->execute([':id' => $candidate]);
+    $exists = (int) ($stmt->fetchColumn() ?: 0);
+    return $exists > 0 ? $exists : null;
+}
+
 try {
     $user = requireAdminApi(['manager', 'admin']);
     $pdo = db();
@@ -119,11 +129,16 @@ try {
     if ($method === 'GET') {
         $campaigns = $pdo->query(
             'SELECT c.id, c.subject, c.status, c.created_at, c.sent_at,
-                    COALESCE(SUM(CASE WHEN l.status = "sent" THEN 1 ELSE 0 END), 0) AS sent_count,
-                    COALESCE(SUM(CASE WHEN l.status = "failed" THEN 1 ELSE 0 END), 0) AS failed_count
+                    COALESCE(ls.sent_count, 0) AS sent_count,
+                    COALESCE(ls.failed_count, 0) AS failed_count
              FROM newsletter_campaigns c
-             LEFT JOIN newsletter_campaign_logs l ON l.campaign_id = c.id
-             GROUP BY c.id
+             LEFT JOIN (
+                SELECT campaign_id,
+                       SUM(CASE WHEN status = "sent" THEN 1 ELSE 0 END) AS sent_count,
+                       SUM(CASE WHEN status = "failed" THEN 1 ELSE 0 END) AS failed_count
+                FROM newsletter_campaign_logs
+                GROUP BY campaign_id
+             ) ls ON ls.campaign_id = c.id
              ORDER BY c.created_at DESC, c.id DESC
              LIMIT 200'
         )->fetchAll(PDO::FETCH_ASSOC);
@@ -161,6 +176,7 @@ try {
             jsonResponse(['error' => 'URL image invalide.'], 422);
         }
 
+        $createdBy = newsletterResolveValidAdminId($pdo, $user);
         $stmt = $pdo->prepare(
             "INSERT INTO newsletter_campaigns
               (subject, content_html, cta_text, cta_url, image_url, status, created_by, created_at)
@@ -173,13 +189,33 @@ try {
             ':cta_text' => ($ctaText !== '' ? $ctaText : null),
             ':cta_url' => ($ctaUrl !== '' ? $ctaUrl : null),
             ':image_url' => ($imageUrl !== '' ? $imageUrl : null),
-            ':created_by' => (int) ($user['id'] ?? 0) ?: null,
+            ':created_by' => $createdBy,
         ]);
-
-        jsonResponse(['data' => ['campaign_id' => (int) $pdo->lastInsertId()]], 201);
+        $campaignId = (int) $pdo->lastInsertId();
+        jsonResponse([
+            'data' => [
+                'campaign_id' => $campaignId,
+                'campaign' => [
+                    'id' => $campaignId,
+                    'subject' => $subject,
+                    'status' => 'draft',
+                    'sent_count' => 0,
+                    'failed_count' => 0,
+                    'created_at' => date('Y-m-d H:i:s'),
+                    'sent_at' => null,
+                ],
+            ],
+        ], 201);
     }
 
     if ($action === 'send') {
+        $autoloadPath = dirname(__DIR__, 2) . '/vendor/autoload.php';
+        if (!is_file($autoloadPath)) {
+            jsonResponse(['error' => 'Dependances email indisponibles (vendor/autoload.php manquant).'], 500);
+        }
+        require_once $autoloadPath;
+        require_once dirname(__DIR__, 2) . '/config/smtp.php';
+
         $campaignId = (int) ($payload['campaign_id'] ?? 0);
         if ($campaignId <= 0) {
             jsonResponse(['error' => 'Campagne invalide.'], 422);

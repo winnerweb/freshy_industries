@@ -2,6 +2,11 @@
 require_once __DIR__ . '/csrf.php';
 $freshyCsrfToken = csrfToken();
 
+// Force UTF-8 for proper rendering of special characters like "•".
+if (!headers_sent()) {
+    header('Content-Type: text/html; charset=UTF-8');
+}
+
 if (!function_exists('freshyAsset')) {
     function freshyAsset(string $path): string
     {
@@ -34,8 +39,20 @@ if (!function_exists('freshyAsset')) {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <?php
-    // Détection de la page courante pour les liens actifs
+    // Detection de la page courante pour les liens actifs
     $current_page = basename($_SERVER['PHP_SELF']);
+    $normalizePageName = static function (string $name): string {
+        $name = rawurldecode($name);
+        $ascii = @iconv('UTF-8', 'ASCII//TRANSLIT//IGNORE', $name);
+        if (is_string($ascii) && $ascii !== '') {
+            $name = $ascii;
+        }
+        $name = strtolower($name);
+        $name = preg_replace('/[^a-z0-9_.-]+/', '_', $name) ?? '';
+        return trim($name, '_');
+    };
+    $normalized_page = $normalizePageName($current_page);
+    $isFruitBoostPage = str_starts_with($normalized_page, 'freshy_fruit_boost');
 
     if (!empty($additional_css) && is_array($additional_css)) {
         foreach ($additional_css as $css_file) {
@@ -43,9 +60,9 @@ if (!function_exists('freshyAsset')) {
         }
     }
 
-    // Métadonnées de partage (Open Graph + Twitter Card)
+    // Metadonnees de partage (Open Graph + Twitter Card)
     $siteConfig = [
-        'base_url'   => '', // à remplir plus tard en prod (ex: https://freshy-industries.com)
+        'base_url'   => getenv('SITE_BASE_URL') ?: '',
         'site_name'  => 'Freshy Industries',
         'twitter_at' => '@FreshyIndustries',
     ];
@@ -67,11 +84,11 @@ if (!function_exists('freshyAsset')) {
             <ul class="nav-links">
                 <li><a href="index.php" class="<?php echo $current_page === 'index.php' ? 'active' : ''; ?>">Accueil</a></li>
                 <li class="dropdown">
-                    <a href="#" class="<?php echo in_array($current_page, ['freshy_palm_page.php', 'freshy_fruit_boosté.php']) ? 'active' : ''; ?>">Nos marques et produits <i class="fas fa-chevron-down dropdown-icon"></i></a>
+                    <a href="#" class="<?php echo ($current_page === 'freshy_palm_page.php' || $isFruitBoostPage) ? 'active' : ''; ?>">Nos marques et produits <i class="fas fa-chevron-down dropdown-icon"></i></a>
 
                     <div class="dropdown-content">
                         <a href="freshy_palm_page.php" class="<?php echo $current_page === 'freshy_palm_page.php' ? 'active' : ''; ?>">Freshy Palm</a>
-                        <a href="freshy_fruit_boosté.php" class="<?php echo $current_page === 'freshy_fruit_boosté.php' ? 'active' : ''; ?>">Freshy le Fruit Boosté</a>
+                        <a href="freshy_fruit_boost.php" class="<?php echo $isFruitBoostPage ? 'active' : ''; ?>">Freshy le Fruit Boosté</a>
                     </div>
                 </li>
                 <li><a href="epicerie_terroire.php" class="<?php echo $current_page === 'epicerie_terroire.php' ? 'active' : ''; ?>">Épicerie du terroir</a></li>
@@ -106,11 +123,11 @@ if (!function_exists('freshyAsset')) {
         <nav class="sidebar-nav">
             <ul>
                 <li><a href="index.php" class="sidebar-link <?php echo $current_page === 'index.php' ? 'active' : ''; ?>">Accueil</a></li>
-                <li class="sidebar-dropdown <?php echo in_array($current_page, ['freshy_palm_page.php', 'freshy_fruit_boosté.php']) ? 'active' : ''; ?>">
-                    <a href="#" class="sidebar-link dropdown-toggle <?php echo in_array($current_page, ['freshy_palm_page.php', 'freshy_fruit_boosté.php']) ? 'active' : ''; ?>">Nos marques et produits <i class="fas fa-chevron-down"></i></a>
-                    <ul class="sidebar-dropdown-content" style="<?php echo in_array($current_page, ['freshy_palm_page.php', 'freshy_fruit_boosté.php']) ? 'max-height: 500px;' : ''; ?>">
+                <li class="sidebar-dropdown <?php echo ($current_page === 'freshy_palm_page.php' || $isFruitBoostPage) ? 'active' : ''; ?>">
+                    <a href="#" class="sidebar-link dropdown-toggle <?php echo ($current_page === 'freshy_palm_page.php' || $isFruitBoostPage) ? 'active' : ''; ?>">Nos marques et produits <i class="fas fa-chevron-down"></i></a>
+                    <ul class="sidebar-dropdown-content" style="<?php echo ($current_page === 'freshy_palm_page.php' || $isFruitBoostPage) ? 'max-height: 500px;' : ''; ?>">
                         <li><a href="freshy_palm_page.php" class="<?php echo $current_page === 'freshy_palm_page.php' ? 'active' : ''; ?>">Freshy Palm</a></li>
-                        <li><a href="freshy_fruit_boosté.php" class="<?php echo $current_page === 'freshy_fruit_boosté.php' ? 'active' : ''; ?>">Freshy le Fruit Boosté</a></li>
+                        <li><a href="freshy_fruit_boost.php" class="<?php echo $isFruitBoostPage ? 'active' : ''; ?>">Freshy le Fruit Boosté</a></li>
                     </ul>
                 </li>
                 <li><a href="epicerie_terroire.php" class="sidebar-link <?php echo $current_page === 'epicerie_terroire.php' ? 'active' : ''; ?>">Épicerie du terroir</a></li>
@@ -135,3 +152,4 @@ if (!function_exists('freshyAsset')) {
             <ul class="global-search-suggestions" id="globalSearchSuggestions" role="listbox" aria-label="Suggestions de recherche"></ul>
         </div>
     </section>
+

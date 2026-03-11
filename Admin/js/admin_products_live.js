@@ -60,8 +60,20 @@
     if (!normalizedRaw.startsWith('/')) {
       return siteBase ? `${siteBase}/${normalizedRaw}` : `/${normalizedRaw}`;
     }
-    const firstSegment = (window.location.pathname.split('/').filter(Boolean)[0] || '').trim();
-    return firstSegment ? `/${firstSegment}${normalizedRaw}` : normalizedRaw;
+
+    // Handle local absolute paths persisted in DB (e.g. "/site_test/uploads/...") on production domains.
+    let absolutePath = normalizedRaw.replace(/^\/site_test(?=\/)/i, '');
+    if (!absolutePath.startsWith('/')) {
+      absolutePath = `/${absolutePath}`;
+    }
+
+    if (!siteBase) {
+      return absolutePath;
+    }
+    if (absolutePath === siteBase || absolutePath.startsWith(`${siteBase}/`)) {
+      return absolutePath;
+    }
+    return `${siteBase}${absolutePath}`;
   };
   const normalizeKey = (value) =>
     String(value || '')
@@ -248,18 +260,15 @@
             <option value="non_concentre">Non concentre</option>
           </select>
         </div>
-        <div class="admin-form-group">
-          <label for="modalProductVariantLabel">Format</label>
-          <select class="admin-select" id="modalProductVariantLabel" name="variant_label">
-            <option value="">Selectionner</option>
-          </select>
-        </div>
         <div class="admin-form-group admin-form-group--full">
-          <label><input type="checkbox" name="all_formats" checked> Generer tous les formats autorises</label>
-        </div>
-        <div class="admin-form-group">
-          <label for="modalProductPrice">Prix (FCFA)</label>
-          <input class="admin-input" id="modalProductPrice" name="price_fcfa" type="number" min="1" required value="${defaultPriceFcfa > 0 ? defaultPriceFcfa : ''}">
+          <label>Formats</label>
+          <div class="admin-dynamic-formats__header">
+            <span id="modalFormatsSummary" class="admin-dynamic-formats__summary">0 format</span>
+            <button class="admin-btn admin-btn--chip admin-dynamic-formats__add" id="modalAddFormatBtn" type="button">
+              <i class="fa-solid fa-plus" aria-hidden="true"></i> Ajouter un format
+            </button>
+          </div>
+          <div id="modalFormatsContainer" class="admin-dynamic-formats"></div>
         </div>
         <div class="admin-form-group">
           <label for="modalProductStock">Quantite</label>
@@ -295,9 +304,10 @@
         const decorPreview = form.querySelector('#modalDecorPreview');
         const creamTypeField = form.querySelector('[name="cream_type"]');
         const creamTypeGroup = form.querySelector('#modalCreamTypeGroup');
-        const variantField = form.querySelector('[name="variant_label"]');
-        const priceField = form.querySelector('[name="price_fcfa"]');
-        const allFormatsField = form.querySelector('[name="all_formats"]');
+        const stockField = form.querySelector('[name="stock_qty"]');
+        const formatsContainer = form.querySelector('#modalFormatsContainer');
+        const addFormatBtn = form.querySelector('#modalAddFormatBtn');
+        const formatsSummary = form.querySelector('#modalFormatsSummary');
 
         const inferCreamTypeFromProduct = () => {
           const label = String(product?.variant_label || '');
@@ -313,16 +323,56 @@
           return text.includes('non_concentre') ? 'non_concentre' : 'concentre';
         };
 
-        const syncPriceFromVariant = () => {
-          const selectedOption = variantField?.options?.[variantField.selectedIndex];
-          const selectedPriceCents = Number(selectedOption?.dataset?.priceCents || 0);
-          if (priceField) {
-            priceField.value = selectedPriceCents > 0 ? String(Math.floor(selectedPriceCents / 100)) : '';
-            priceField.readOnly = Boolean(allFormatsField?.checked);
+        const createFormatRow = (initial = {}) => {
+          const formatLabel = String(initial.label || initial.contenance || '').trim();
+          const priceCents = Number(initial.price_cents || 0);
+          const priceFcfa = priceCents > 0 ? Math.floor(priceCents / 100) : '';
+          const visibleSite = initial.visible_site === false || Number(initial.visible_site) === 0 ? 0 : 1;
+          const variantId = Number(initial.id || initial.variant_id || 0);
+
+          const row = document.createElement('div');
+          row.className = 'admin-dynamic-format-row';
+          row.innerHTML = `
+            <input class="admin-input admin-dynamic-format-row__input" type="text" name="format_label" placeholder="Ex: 25cl" value="${formatLabel}">
+            <input class="admin-input admin-dynamic-format-row__input" type="number" name="format_price_fcfa" min="1" placeholder="Prix FCFA" value="${priceFcfa}">
+            <button class="admin-btn admin-btn--danger" type="button" data-remove-format aria-label="Supprimer format">
+              <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+            </button>
+            <label class="admin-dynamic-format-row__visibility">
+              <input type="checkbox" name="format_visible_site" ${visibleSite ? 'checked' : ''}> Afficher sur le site
+            </label>
+            <input type="hidden" name="format_variant_id" value="${variantId > 0 ? variantId : ''}">
+          `;
+          return row;
+        };
+
+        const addFormatRow = (initial = {}) => {
+          if (!formatsContainer) return;
+          const row = createFormatRow(initial);
+          row.classList.add('is-entering');
+          formatsContainer.appendChild(row);
+          requestAnimationFrame(() => {
+            row.classList.remove('is-entering');
+          });
+          refreshFormatsSummary();
+        };
+
+        const refreshFormatsSummary = () => {
+          const count = formatsContainer?.querySelectorAll('.admin-dynamic-format-row').length || 0;
+          if (!formatsSummary) return;
+          formatsSummary.textContent = `${count} format${count > 1 ? 's' : ''}`;
+        };
+
+        const ensureAtLeastOneFormatRow = () => {
+          if (!formatsContainer) return;
+          if (!formatsContainer.querySelector('.admin-dynamic-format-row')) {
+            addFormatRow({});
+          } else {
+            refreshFormatsSummary();
           }
         };
 
-        const updateVariantOptions = () => {
+        const updateCategoryBehavior = () => {
           const categoryKey = getCategoryCatalogKey(categoryField.value);
           const isCreme = categoryKey === 'creme';
           if (creamTypeGroup) creamTypeGroup.hidden = !isCreme;
@@ -330,30 +380,6 @@
           if (isCreme && creamTypeField && !creamTypeField.value) {
             creamTypeField.value = 'concentre';
           }
-          const creamType = isCreme ? String(creamTypeField?.value || 'concentre') : '';
-          const rows = getAllowedVariantRows(categoryKey, creamType);
-          const currentLabel = String(variantField?.value || '');
-          const existingVariants = Array.isArray(product?.variants) ? product.variants : [];
-          const existingVariantByLabel = new Map(
-            existingVariants.map((v) => [normalizeKey(v?.label || ''), Number(v?.id || 0)])
-          );
-          if (variantField) {
-            variantField.innerHTML = rows.length
-              ? rows.map((row) => {
-                const label = String(row.label || '');
-                const norm = normalizeKey(label);
-                const existingVariantId = existingVariantByLabel.get(norm) || 0;
-                const priceCents = Number(row.price_cents) || 0;
-                const priceFcfa = Math.floor(priceCents / 100).toLocaleString('fr-FR');
-                return `<option value="${label}" data-price-cents="${priceCents}" data-variant-id="${existingVariantId > 0 ? existingVariantId : ''}">${label} - ${priceFcfa} Fcfa</option>`;
-              }).join('')
-              : '<option value="">Selectionner</option>';
-            if (rows.length) {
-              const exact = rows.find((row) => String(row.label) === currentLabel);
-              variantField.value = exact ? exact.label : rows[0].label;
-            }
-          }
-          syncPriceFromVariant();
         };
 
         const bindPreview = (input, previewNode) => {
@@ -381,26 +407,45 @@
           if (creamTypeField) {
             creamTypeField.value = inferCreamTypeFromProduct();
           }
-          updateVariantOptions();
-          if (allFormatsField) allFormatsField.checked = true;
-          if (variantField && product.variant_label) {
-            const available = [...variantField.options].some((opt) => opt.value === String(product.variant_label));
-            if (available) {
-              variantField.value = String(product.variant_label);
-              variantField.dispatchEvent(new Event('change'));
-            }
+          updateCategoryBehavior();
+
+          const existingVariants = Array.isArray(product?.variants) ? product.variants : [];
+          if (existingVariants.length) {
+            existingVariants
+              .filter((v) => Boolean(v?.is_active))
+              .sort((a, b) => Number(a?.sort_order || 0) - Number(b?.sort_order || 0))
+              .forEach((v) => addFormatRow(v));
+          } else if (product?.variant_label) {
+            addFormatRow({
+              variant_id: product.variant_id || 0,
+              label: String(product.variant_label || ''),
+              price_cents: Number(product.price_cents || 0),
+              visible_site: 1,
+            });
+          } else {
+            addFormatRow({});
           }
         } else {
           statusField.value = 'active';
           if (creamTypeField) creamTypeField.value = '';
-          if (allFormatsField) allFormatsField.checked = true;
-          updateVariantOptions();
+          updateCategoryBehavior();
+          addFormatRow({});
         }
 
-        categoryField?.addEventListener('change', updateVariantOptions);
-        creamTypeField?.addEventListener('change', updateVariantOptions);
-        variantField?.addEventListener('change', syncPriceFromVariant);
-        allFormatsField?.addEventListener('change', syncPriceFromVariant);
+        categoryField?.addEventListener('change', updateCategoryBehavior);
+        creamTypeField?.addEventListener('change', updateCategoryBehavior);
+        addFormatBtn?.addEventListener('click', () => addFormatRow({}));
+        formatsContainer?.addEventListener('click', (e) => {
+          const removeBtn = e.target.closest('[data-remove-format]');
+          if (!removeBtn) return;
+          const row = removeBtn.closest('.admin-dynamic-format-row');
+          if (!row) return;
+          row.classList.add('is-removing');
+          window.setTimeout(() => {
+            row.remove();
+            ensureAtLeastOneFormatRow();
+          }, 200);
+        });
         bindPreview(primaryImageInput, primaryPreview);
         bindPreview(decorImageInput, decorPreview);
 
@@ -409,19 +454,36 @@
           event.preventDefault();
           const formData = new FormData(form);
           const name = String(formData.get('name') || '').trim();
-          const priceFcfa = Number(formData.get('price_fcfa'));
           const stock = Number(formData.get('stock_qty'));
           const status = String(formData.get('status') || '').trim().toLowerCase();
           const categoryId = Number(formData.get('category_id')) || null;
-          const variantLabel = String(formData.get('variant_label') || '').trim();
           const creamType = String(formData.get('cream_type') || '').trim();
-          const allFormats = Boolean(formData.get('all_formats'));
-          const selectedVariantOption = variantField?.options?.[variantField.selectedIndex] || null;
-          const selectedVariantId = Number(selectedVariantOption?.dataset?.variantId || 0);
           const primaryImageFile = primaryImageInput?.files?.[0] || null;
           const decorImageFile = decorImageInput?.files?.[0] || null;
           let primaryImageUrl = String(primaryImageUrlField?.value || '').trim();
           let decorImageUrl = String(decorImageUrlField?.value || '').trim();
+
+        const formatRows = [...(formatsContainer?.querySelectorAll('.admin-dynamic-format-row') || [])];
+          formatRows.forEach((row) => {
+            row.querySelector('[name="format_label"]')?.classList.remove('is-invalid');
+            row.querySelector('[name="format_price_fcfa"]')?.classList.remove('is-invalid');
+            row.querySelector('.admin-dynamic-format-row__error')?.remove();
+          });
+          const parsedFormats = formatRows.map((row, idx) => {
+            const label = String(row.querySelector('[name="format_label"]')?.value || '').trim();
+            const price = Number(row.querySelector('[name="format_price_fcfa"]')?.value || 0);
+            const visible = Boolean(row.querySelector('[name="format_visible_site"]')?.checked);
+            const variantId = Number(row.querySelector('[name="format_variant_id"]')?.value || 0);
+            return {
+              variant_id: variantId > 0 ? variantId : null,
+              contenance: label,
+              label,
+              price_fcfa: Math.floor(price || 0),
+              visible_site: visible ? 1 : 0,
+              sort_order: idx,
+              stock_qty: Math.floor(Number(stockField?.value || 0)),
+            };
+          }).filter((f) => f.label !== '' || f.price_fcfa > 0);
 
           if (!name) {
             notify('error', 'Nom produit requis.');
@@ -431,12 +493,33 @@
             notify('error', 'Selectionne une categorie.');
             return;
           }
-          if (!variantLabel) {
-            notify('error', 'Selectionne un format valide.');
+          if (!Number.isFinite(stock) || stock < 0) {
+            notify('error', 'Stock invalide.');
             return;
           }
-          if ((!allFormats && (!Number.isFinite(priceFcfa) || priceFcfa <= 0)) || !Number.isFinite(stock) || stock < 0) {
-            notify('error', 'Prix ou stock invalide.');
+          if (!parsedFormats.length) {
+            notify('error', 'Ajoute au moins un format.');
+            return;
+          }
+          const hasInvalidFormat = parsedFormats.some((f, idx) => {
+            const row = formatRows[idx];
+            if (!row) return false;
+            const labelInput = row.querySelector('[name="format_label"]');
+            const priceInput = row.querySelector('[name="format_price_fcfa"]');
+            const labelInvalid = !f.label;
+            const priceInvalid = !Number.isFinite(f.price_fcfa) || f.price_fcfa <= 0;
+            if (labelInvalid) labelInput?.classList.add('is-invalid');
+            if (priceInvalid) priceInput?.classList.add('is-invalid');
+            if (labelInvalid || priceInvalid) {
+              const error = document.createElement('small');
+              error.className = 'admin-dynamic-format-row__error';
+              error.textContent = 'Libelle et prix (> 0) obligatoires.';
+              row.appendChild(error);
+            }
+            return labelInvalid || priceInvalid;
+          });
+          if (hasInvalidFormat) {
+            notify('error', 'Chaque format doit avoir un libelle et un prix valide.');
             return;
           }
 
@@ -451,17 +534,13 @@
             category_id: categoryId,
             status,
             is_new: Boolean(formData.get('is_new')),
-            variant_label: variantLabel,
             cream_type: creamType,
-            all_formats: allFormats,
-            price_fcfa: Math.floor(priceFcfa || 0),
             stock_qty: Math.floor(stock),
+            all_formats: false,
+            formats: parsedFormats,
           };
           if (mode === 'edit' && product) {
             payload.product_id = Number(product.id);
-            payload.variant_id = selectedVariantId > 0
-              ? selectedVariantId
-              : (Number(product.variant_id || 0) || null);
           }
 
           try {

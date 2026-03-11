@@ -1,4 +1,4 @@
-﻿:root {
+:root {
   --brand-green: #83BA3A;
   --toast-z-index: 1200;
   --toast-width: min(420px, calc(100vw - 24px));
@@ -9,7 +9,7 @@
   --toast-font-size: 14px;
   --toast-line-height: 1.35;
   --toast-success-bg: var(--brand-green);
-  --toast-success-fg: #ecfff6;
+  --toast-success-fg: #ffffff;
   --toast-error-bg: #8a1c22;
   --toast-error-fg: #fff2f3;
   --toast-warning-bg: #7a4b00;
@@ -155,6 +155,7 @@
     padding: 11px 10px 11px 9px;
   }
 }
+
 
 
 

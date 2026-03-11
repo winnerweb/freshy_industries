@@ -36,6 +36,45 @@
     button.classList.toggle('is-loading', !!isLoading);
   };
 
+  const eyeIconSvg = () => `
+    <svg class="admin-password-toggle__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+      <path class="admin-password-toggle__eye" d="M12 5C6.5 5 2 9.6 1 12c1 2.4 5.5 7 11 7s10-4.6 11-7c-1-2.4-5.5-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
+      <circle class="admin-password-toggle__pupil" cx="12" cy="12" r="2.3"></circle>
+      <path class="admin-password-toggle__slash" d="M3 4.5 20.5 22"></path>
+    </svg>
+  `;
+
+  const setupPasswordToggles = () => {
+    const inputs = securityForm.querySelectorAll('input[type="password"]');
+    inputs.forEach((input) => {
+      input.classList.add('admin-input--with-toggle');
+      let wrap = input.closest('.admin-password-input-wrap');
+      if (!wrap) {
+        wrap = document.createElement('div');
+        wrap.className = 'admin-password-input-wrap';
+        input.parentNode.insertBefore(wrap, input);
+        wrap.appendChild(input);
+      }
+      if (wrap.querySelector('.admin-password-toggle')) return;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'admin-password-toggle';
+      button.setAttribute('aria-label', 'Afficher le mot de passe');
+      button.setAttribute('aria-pressed', 'false');
+      button.innerHTML = eyeIconSvg();
+      button.addEventListener('click', () => {
+        const isPassword = input.type === 'password';
+        input.type = isPassword ? 'text' : 'password';
+        button.classList.toggle('is-visible', isPassword);
+        button.setAttribute('aria-pressed', isPassword ? 'true' : 'false');
+        button.setAttribute('aria-label', isPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe');
+        input.focus();
+      });
+      wrap.appendChild(button);
+    });
+  };
+
   const toJson = async (response) => {
     let payload = {};
     try {
@@ -214,5 +253,6 @@
     window.setTimeout(() => URL.revokeObjectURL(objectUrl), 10_000);
   });
 
+  setupPasswordToggles();
   load();
 })();

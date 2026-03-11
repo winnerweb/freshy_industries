@@ -4,7 +4,13 @@ declare(strict_types=1);
 require_once __DIR__ . '/../includes/db.php';
 require_once __DIR__ . '/../config/fedapay.php';
 require_once __DIR__ . '/application/payment_application_service.php';
-require_once __DIR__ . '/../vendor/autoload.php';
+$autoloadPath = __DIR__ . '/../vendor/autoload.php';
+if (!is_file($autoloadPath)) {
+    $projectBase = fedapayProjectBaseUrlFromRequest();
+    header('Location: ' . $projectBase . '/payment_failed.php?reason=' . urlencode('sdk_missing'), true, 302);
+    exit;
+}
+require_once $autoloadPath;
 
 use FedaPay\FedaPay;
 use FedaPay\Transaction;
@@ -75,4 +81,3 @@ try {
     $projectBase = fedapayProjectBaseUrlFromRequest();
     redirectTo($projectBase . '/payment_failed.php?reason=' . urlencode('return_error'));
 }
-

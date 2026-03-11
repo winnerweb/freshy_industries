@@ -10,8 +10,10 @@
       <td>${Number(o.amount).toLocaleString('fr-FR')} Fcfa</td>
       <td><span class="admin-status admin-status--${o.status}">${o.status}</span></td>
       <td>${o.payment}</td>
-      <td><button class="admin-btn">Voir dÃ©tails</button></td>
+      <td><button class="admin-btn">Voir détails</button></td>
     </tr>
   `).join('');
 })();
+
+
 

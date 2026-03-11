@@ -168,7 +168,7 @@ try {
     $status = trim((string) ($payload['status'] ?? 'draft'));
     $publishedAt = trim((string) ($payload['published_at'] ?? ''));
 
-    if ($title === '' || $slug === '' || $excerpt === '' || $intro === '' || $body1 === '' || $body2 === '') {
+    if ($title === '' || $slug === '' || $excerpt === '' || $intro === '' || $body1 === '') {
         jsonResponse(['error' => 'Champs obligatoires manquants'], 422);
     }
     if (!in_array($status, ['draft', 'published'], true)) {

@@ -62,15 +62,20 @@ CREATE TABLE IF NOT EXISTS product_variants (
   id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
   product_id BIGINT UNSIGNED NOT NULL,
   sku VARCHAR(100) NOT NULL,
+  contenance VARCHAR(120) NULL,
   label VARCHAR(120) NOT NULL,
   price_cents INT UNSIGNED NOT NULL,
   currency CHAR(3) NOT NULL DEFAULT 'XOF',
+  visible_site TINYINT(1) NOT NULL DEFAULT 1,
+  sort_order INT NOT NULL DEFAULT 0,
   is_active TINYINT(1) NOT NULL DEFAULT 1,
   created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (id),
   UNIQUE KEY uq_variants_sku (sku),
+  UNIQUE KEY uq_variants_product_label (product_id, label),
   KEY idx_variants_product (product_id),
+  KEY idx_variants_product_sort (product_id, sort_order, id),
   CONSTRAINT fk_variants_product
     FOREIGN KEY (product_id) REFERENCES products(id)
     ON DELETE CASCADE

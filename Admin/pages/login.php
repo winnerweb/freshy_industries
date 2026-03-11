@@ -38,6 +38,7 @@ $siteBase = rtrim($siteBase, '/');
 $logoUrl = ($siteBase !== '' ? $siteBase : '') . '/images/logo_freshy.webp';
 $backgroundUrl = ($siteBase !== '' ? $siteBase : '') . '/images/banniere_vente.webp';
 $videoUrl = adminResolveAuthVideoUrl($siteBase);
+$homeUrl = ($siteBase !== '' ? $siteBase : '') . '/index.php';
 ?><!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -57,6 +58,9 @@ $videoUrl = adminResolveAuthVideoUrl($siteBase);
     <div class="admin-auth-overlay">
         <header class="admin-auth-heading">
             <h1>Bienvenue, connectez vous ici</h1>
+            <p class="admin-auth-home-link">
+                <a href="<?php echo htmlspecialchars($homeUrl, ENT_QUOTES, 'UTF-8'); ?>">Retour a l'accueil</a>
+            </p>
         </header>
 
         <section class="admin-auth-card" aria-labelledby="adminLoginTitle">
@@ -86,18 +90,33 @@ $videoUrl = adminResolveAuthVideoUrl($siteBase);
                 <small id="adminLoginEmailError" class="admin-login-field-error" aria-live="polite"></small>
 
                 <label class="sr-only" for="adminLoginPassword">Mot de passe</label>
-                <input
-                    class="admin-auth-input admin-login-input"
-                    id="adminLoginPassword"
-                    type="password"
-                    name="password"
-                    required
-                    minlength="8"
-                    placeholder="Mot de passe"
-                    autocomplete="current-password"
-                    aria-describedby="adminLoginPasswordError adminLoginCapsLockHint"
-                    aria-invalid="false"
-                >
+                <div class="admin-password-input-wrap">
+                    <input
+                        class="admin-auth-input admin-login-input admin-auth-input--with-toggle"
+                        id="adminLoginPassword"
+                        type="password"
+                        name="password"
+                        required
+                        minlength="8"
+                        placeholder="Mot de passe"
+                        autocomplete="current-password"
+                        aria-describedby="adminLoginPasswordError adminLoginCapsLockHint"
+                        aria-invalid="false"
+                    >
+                    <button
+                        type="button"
+                        class="admin-password-toggle"
+                        id="adminLoginPasswordToggle"
+                        aria-label="Afficher le mot de passe"
+                        aria-pressed="false"
+                    >
+                        <svg class="admin-password-toggle__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                            <path class="admin-password-toggle__eye" d="M12 5C6.5 5 2 9.6 1 12c1 2.4 5.5 7 11 7s10-4.6 11-7c-1-2.4-5.5-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
+                            <circle class="admin-password-toggle__pupil" cx="12" cy="12" r="2.3"></circle>
+                            <path class="admin-password-toggle__slash" d="M3 4.5 20.5 22"></path>
+                        </svg>
+                    </button>
+                </div>
                 <small id="adminLoginPasswordError" class="admin-login-field-error" aria-live="polite"></small>
                 <small id="adminLoginCapsLockHint" class="admin-login-capslock" aria-live="polite"></small>
 

@@ -143,9 +143,89 @@ function normalizeVariantLabel(string $value): string
     return productCatalogNormalize($value);
 }
 
+function tableHasColumn(PDO $pdo, string $table, string $column): bool
+{
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(*)
+         FROM information_schema.COLUMNS
+         WHERE TABLE_SCHEMA = DATABASE()
+           AND TABLE_NAME = :table_name
+           AND COLUMN_NAME = :column_name'
+    );
+    $stmt->execute([
+        ':table_name' => $table,
+        ':column_name' => $column,
+    ]);
+    return (int) $stmt->fetchColumn() > 0;
+}
+
+function parseDynamicFormatsPayload(array $formatsPayload, int $defaultStockQty): array
+{
+    $rows = [];
+    $seen = [];
+
+    foreach ($formatsPayload as $index => $raw) {
+        if (!is_array($raw)) {
+            continue;
+        }
+
+        $contenance = trim((string) ($raw['contenance'] ?? ''));
+        $label = trim((string) ($raw['label'] ?? $contenance));
+        $priceFcfaRaw = $raw['price_fcfa'] ?? null;
+        $priceCentsRaw = $raw['price_cents'] ?? null;
+        $visibleSiteRaw = $raw['visible_site'] ?? 1;
+        $sortOrderRaw = $raw['sort_order'] ?? null;
+        $variantIdRaw = $raw['variant_id'] ?? ($raw['id'] ?? 0);
+        $stockQtyRaw = $raw['stock_qty'] ?? $defaultStockQty;
+
+        $allEmpty = ($contenance === '' && $label === '' && $priceFcfaRaw === null && $priceCentsRaw === null);
+        if ($allEmpty) {
+            continue;
+        }
+
+        if ($label === '') {
+            throw new InvalidArgumentException('Format #' . ($index + 1) . ' : libelle manquant');
+        }
+
+        $priceCents = 0;
+        if ($priceCentsRaw !== null && is_numeric($priceCentsRaw)) {
+            $priceCents = max(0, (int) $priceCentsRaw);
+        } else {
+            $priceCents = fcfaToCents($priceFcfaRaw);
+        }
+        if ($priceCents <= 0) {
+            throw new InvalidArgumentException('Format #' . ($index + 1) . ' : prix invalide');
+        }
+
+        $normalized = normalizeVariantLabel($label);
+        if ($normalized === '') {
+            throw new InvalidArgumentException('Format #' . ($index + 1) . ' : libelle invalide');
+        }
+        if (isset($seen[$normalized])) {
+            throw new InvalidArgumentException('Format en double : ' . $label);
+        }
+        $seen[$normalized] = true;
+
+        $rows[] = [
+            'variant_id' => max(0, (int) $variantIdRaw),
+            'contenance' => $contenance !== '' ? $contenance : null,
+            'label' => $label,
+            'price_cents' => $priceCents,
+            'visible_site' => !empty($visibleSiteRaw) ? 1 : 0,
+            'sort_order' => is_numeric($sortOrderRaw) ? (int) $sortOrderRaw : count($rows),
+            'stock_qty' => max(0, (int) $stockQtyRaw),
+        ];
+    }
+
+    return $rows;
+}
+
 try {
     requireAdminApi(['manager', 'admin']);
     $pdo = db();
+    $variantSupportsContenance = tableHasColumn($pdo, 'product_variants', 'contenance');
+    $variantSupportsVisibleSite = tableHasColumn($pdo, 'product_variants', 'visible_site');
+    $variantSupportsSortOrder = tableHasColumn($pdo, 'product_variants', 'sort_order');
     $method = $_SERVER['REQUEST_METHOD'] ?? 'GET';
     $categories = $pdo->query(
         'SELECT id, name, slug
@@ -290,6 +370,7 @@ try {
         $allFormats = !empty($payload['all_formats']);
         $priceFcfa = $payload['price_fcfa'] ?? 0;
         $stockQty = max(0, (int) ($payload['stock_qty'] ?? 0));
+        $formatsPayload = is_array($payload['formats'] ?? null) ? $payload['formats'] : [];
         $primaryImageUrl = sanitizeProductImagePath($payload['primary_image_url'] ?? null);
         $decorImageUrl = sanitizeProductImagePath($payload['decor_image_url'] ?? null);
 
@@ -309,7 +390,16 @@ try {
         }
         $allowedRows = [];
         $manualPriceCents = 0;
-        if ($allFormats) {
+        try {
+            $dynamicFormatRows = parseDynamicFormatsPayload($formatsPayload, $stockQty);
+        } catch (InvalidArgumentException $e) {
+            jsonResponse(['error' => $e->getMessage()], 422);
+        }
+        $useDynamicFormats = !empty($dynamicFormatRows);
+
+        if ($useDynamicFormats) {
+            $allowedRows = $dynamicFormatRows;
+        } elseif ($allFormats) {
             $allowedRows = productCatalogAllowedFormats($categoryCatalogKey, $creamType);
             if (!$allowedRows) {
                 jsonResponse(['error' => 'Invalid format configuration for selected category'], 422);
@@ -346,8 +436,11 @@ try {
         $productId = (int) $pdo->lastInsertId();
 
         $variantStmt = $pdo->prepare(
-            'INSERT INTO product_variants (product_id, sku, label, price_cents, currency, is_active)
-             VALUES (:product_id, :sku, :label, :price_cents, :currency, :is_active)'
+            $variantSupportsContenance || $variantSupportsVisibleSite || $variantSupportsSortOrder
+                ? 'INSERT INTO product_variants (product_id, sku, contenance, label, price_cents, currency, visible_site, sort_order, is_active)
+                   VALUES (:product_id, :sku, :contenance, :label, :price_cents, :currency, :visible_site, :sort_order, :is_active)'
+                : 'INSERT INTO product_variants (product_id, sku, label, price_cents, currency, is_active)
+                   VALUES (:product_id, :sku, :label, :price_cents, :currency, :is_active)'
         );
         $inventoryStmt = $pdo->prepare(
             'INSERT INTO inventory (variant_id, stock_qty, reserved_qty)
@@ -361,12 +454,21 @@ try {
                 continue;
             }
             $variantStmt->execute([
-                ':product_id' => $productId,
-                ':sku' => generateVariantSku($productId),
-                ':label' => $label,
-                ':price_cents' => $price,
-                ':currency' => 'XOF',
-                ':is_active' => 1,
+                ...[
+                    ':product_id' => $productId,
+                    ':sku' => generateVariantSku($productId),
+                    ':label' => $label,
+                    ':price_cents' => $price,
+                    ':currency' => 'XOF',
+                    ':is_active' => 1,
+                ],
+                ...(($variantSupportsContenance || $variantSupportsVisibleSite || $variantSupportsSortOrder)
+                    ? [
+                        ':contenance' => ($row['contenance'] ?? null),
+                        ':visible_site' => (int) ($row['visible_site'] ?? 1),
+                        ':sort_order' => (int) ($row['sort_order'] ?? 0),
+                    ]
+                    : []),
             ]);
             $variantId = (int) $pdo->lastInsertId();
             $createdVariantIds[] = $variantId;
@@ -427,6 +529,7 @@ try {
         $allFormats = !empty($payload['all_formats']);
         $priceFcfa = $payload['price_fcfa'] ?? 0;
         $stockQty = max(0, (int) ($payload['stock_qty'] ?? 0));
+        $formatsPayload = is_array($payload['formats'] ?? null) ? $payload['formats'] : [];
         $primaryImageUrl = sanitizeProductImagePath($payload['primary_image_url'] ?? null);
         $decorImageUrl = sanitizeProductImagePath($payload['decor_image_url'] ?? null);
 
@@ -443,19 +546,32 @@ try {
         if ($categoryCatalogKey === '') {
             jsonResponse(['error' => 'Unsupported category'], 422);
         }
-        $allowedRows = productCatalogAllowedFormats($categoryCatalogKey, $creamType);
-        if (!$allowedRows) {
-            jsonResponse(['error' => 'Invalid format configuration for selected category'], 422);
+        try {
+            $dynamicFormatRows = parseDynamicFormatsPayload($formatsPayload, $stockQty);
+        } catch (InvalidArgumentException $e) {
+            jsonResponse(['error' => $e->getMessage()], 422);
         }
-        if (!$allFormats) {
-            $resolvedPriceCents = productCatalogAllowedFormatPrice($categoryCatalogKey, $variantLabel, $creamType);
-            if ($resolvedPriceCents === null) {
-                jsonResponse(['error' => 'Invalid format for selected category'], 422);
+        $useDynamicFormats = !empty($dynamicFormatRows);
+
+        $allowedRows = [];
+        $manualPriceCents = 0;
+        if ($useDynamicFormats) {
+            $allowedRows = $dynamicFormatRows;
+        } else {
+            $allowedRows = productCatalogAllowedFormats($categoryCatalogKey, $creamType);
+            if (!$allowedRows) {
+                jsonResponse(['error' => 'Invalid format configuration for selected category'], 422);
             }
-            $manualPriceCents = fcfaToCents($priceFcfa);
-            $allowedRows = [
-                ['label' => $variantLabel, 'price_cents' => $manualPriceCents > 0 ? $manualPriceCents : $resolvedPriceCents],
-            ];
+            if (!$allFormats) {
+                $resolvedPriceCents = productCatalogAllowedFormatPrice($categoryCatalogKey, $variantLabel, $creamType);
+                if ($resolvedPriceCents === null) {
+                    jsonResponse(['error' => 'Invalid format for selected category'], 422);
+                }
+                $manualPriceCents = fcfaToCents($priceFcfa);
+                $allowedRows = [
+                    ['label' => $variantLabel, 'price_cents' => $manualPriceCents > 0 ? $manualPriceCents : $resolvedPriceCents],
+                ];
+            }
         }
 
         $beforeStatuses = getProductStatusSnapshots($pdo, [$productId]);
@@ -507,7 +623,103 @@ try {
             }
         }
 
-        if ($allFormats) {
+        if ($useDynamicFormats) {
+            $updateVariantStmt = $pdo->prepare(
+                $variantSupportsContenance || $variantSupportsVisibleSite || $variantSupportsSortOrder
+                    ? 'UPDATE product_variants
+                       SET contenance = :contenance, label = :label, price_cents = :price_cents, visible_site = :visible_site, sort_order = :sort_order, is_active = 1
+                       WHERE id = :id AND product_id = :product_id'
+                    : 'UPDATE product_variants
+                       SET label = :label, price_cents = :price_cents, is_active = 1
+                       WHERE id = :id AND product_id = :product_id'
+            );
+            $insertVariantStmt = $pdo->prepare(
+                $variantSupportsContenance || $variantSupportsVisibleSite || $variantSupportsSortOrder
+                    ? 'INSERT INTO product_variants (product_id, sku, contenance, label, price_cents, currency, visible_site, sort_order, is_active)
+                       VALUES (:product_id, :sku, :contenance, :label, :price_cents, :currency, :visible_site, :sort_order, :is_active)'
+                    : 'INSERT INTO product_variants (product_id, sku, label, price_cents, currency, is_active)
+                       VALUES (:product_id, :sku, :label, :price_cents, :currency, :is_active)'
+            );
+            $deactivateStmt = $pdo->prepare(
+                'UPDATE product_variants
+                 SET is_active = 0
+                 WHERE id = :id AND product_id = :product_id'
+            );
+
+            $keptVariantIds = [];
+            foreach ($allowedRows as $row) {
+                $label = trim((string) ($row['label'] ?? ''));
+                $labelNorm = normalizeVariantLabel($label);
+                $price = (int) ($row['price_cents'] ?? 0);
+                if ($labelNorm === '' || $price <= 0) {
+                    continue;
+                }
+
+                $targetVariantId = 0;
+                $requestedVariantId = (int) ($row['variant_id'] ?? 0);
+                if ($requestedVariantId > 0 && isset($existingById[$requestedVariantId])) {
+                    $targetVariantId = $requestedVariantId;
+                } elseif (isset($existingByLabel[$labelNorm])) {
+                    $targetVariantId = (int) $existingByLabel[$labelNorm];
+                }
+
+                if ($targetVariantId > 0) {
+                    $updateVariantStmt->execute([
+                        ...[
+                            ':id' => $targetVariantId,
+                            ':product_id' => $productId,
+                            ':label' => $label,
+                            ':price_cents' => $price,
+                        ],
+                        ...(($variantSupportsContenance || $variantSupportsVisibleSite || $variantSupportsSortOrder)
+                            ? [
+                                ':contenance' => ($row['contenance'] ?? null),
+                                ':visible_site' => (int) ($row['visible_site'] ?? 1),
+                                ':sort_order' => (int) ($row['sort_order'] ?? 0),
+                            ]
+                            : []),
+                    ]);
+                } else {
+                    $insertVariantStmt->execute([
+                        ...[
+                            ':product_id' => $productId,
+                            ':sku' => generateVariantSku($productId),
+                            ':label' => $label,
+                            ':price_cents' => $price,
+                            ':currency' => 'XOF',
+                            ':is_active' => 1,
+                        ],
+                        ...(($variantSupportsContenance || $variantSupportsVisibleSite || $variantSupportsSortOrder)
+                            ? [
+                                ':contenance' => ($row['contenance'] ?? null),
+                                ':visible_site' => (int) ($row['visible_site'] ?? 1),
+                                ':sort_order' => (int) ($row['sort_order'] ?? 0),
+                            ]
+                            : []),
+                    ]);
+                    $targetVariantId = (int) $pdo->lastInsertId();
+                }
+
+                $keptVariantIds[$targetVariantId] = true;
+                $inventoryStmt->execute([
+                    ':variant_id' => $targetVariantId,
+                    ':stock_qty' => max(0, (int) ($row['stock_qty'] ?? $stockQty)),
+                ]);
+            }
+
+            if (!$keptVariantIds) {
+                jsonResponse(['error' => 'Aucun format valide fourni'], 422);
+            }
+
+            foreach (array_keys($existingById) as $eid) {
+                if (!isset($keptVariantIds[$eid])) {
+                    $deactivateStmt->execute([
+                        ':id' => (int) $eid,
+                        ':product_id' => $productId,
+                    ]);
+                }
+            }
+        } elseif ($allFormats) {
             $allowedByLabel = [];
             foreach ($allowedRows as $row) {
                 $label = trim((string) ($row['label'] ?? ''));

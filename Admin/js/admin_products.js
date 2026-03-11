@@ -105,7 +105,7 @@
     });
     const result = await response.json();
     if (!response.ok) {
-      throw new Error(result?.error || 'CrÃ©ation impossible');
+      throw new Error(result?.error || 'Création impossible');
     }
   };
 
@@ -133,7 +133,7 @@
       }),
     });
     const payload = await response.json();
-    if (!response.ok) throw new Error(payload?.error || 'Mise Ã  jour impossible');
+    if (!response.ok) throw new Error(payload?.error || 'Mise à jour impossible');
   };
 
   const archiveProductRow = async (row) => {
@@ -151,14 +151,14 @@
     event.preventDefault();
     try {
       await createProduct();
-      notify('success', 'Produit crÃ©Ã©.');
+      notify('success', 'Produit créé.');
       form.reset();
       if (stockInput) stockInput.value = '10';
       if (variantLabelInput) variantLabelInput.value = 'Standard';
       if (statusSelect) statusSelect.value = 'active';
       await loadProducts();
     } catch (error) {
-      notify('error', error.message || 'Erreur crÃ©ation produit');
+      notify('error', error.message || 'Erreur création produit');
     }
   });
 
@@ -169,10 +169,10 @@
     if (event.target.closest('.ap-save')) {
       try {
         await saveProductRow(row);
-        notify('success', 'Produit mis Ã  jour.');
+        notify('success', 'Produit mis à jour.');
         await loadProducts();
       } catch (error) {
-        notify('error', error.message || 'Erreur mise Ã  jour');
+        notify('error', error.message || 'Erreur mise à jour');
       }
       return;
     }
@@ -180,7 +180,7 @@
     if (event.target.closest('.ap-archive')) {
       try {
         await archiveProductRow(row);
-        notify('info', 'Produit archivÃ© (status inactive).');
+        notify('info', 'Produit archivé (status inactive).');
         await loadProducts();
       } catch (error) {
         notify('error', error.message || 'Erreur archivage');
@@ -190,4 +190,6 @@
 
   loadProducts();
 })();
+
+
 

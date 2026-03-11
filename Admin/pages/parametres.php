@@ -1,6 +1,8 @@
 <?php
 declare(strict_types=1);
 
+require_once dirname(__DIR__) . '/includes/upload_policies.php';
+
 $adminPageTitle = 'Parametres';
 $adminActiveMenu = 'settings';
 $adminExtraScripts = ['js/admin_settings_live.js'];
@@ -102,8 +104,8 @@ ob_start();
                     <span id="settingsAvatarFallback">AD</span>
                 </div>
                 <div class="settings-avatar-actions">
-                    <input class="admin-input" id="settingAvatar" name="avatar" type="file" accept="image/jpeg,image/png,image/webp">
-                    <small>Formats: JPG/PNG/WEBP, max 2 MB</small>
+                    <input class="admin-input" id="settingAvatar" name="avatar" type="file" accept="<?php echo htmlspecialchars(adminAvatarAcceptAttribute(), ENT_QUOTES, 'UTF-8'); ?>">
+                    <small>Formats: <?php echo htmlspecialchars(adminAvatarFormatsLabel(), ENT_QUOTES, 'UTF-8'); ?>, max <?php echo htmlspecialchars(adminAvatarMaxMbLabel(), ENT_QUOTES, 'UTF-8'); ?> MB</small>
                 </div>
             </div>
 

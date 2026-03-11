@@ -9,9 +9,26 @@ if (!function_exists('socialMetaEsc')) {
 }
 
 if (!function_exists('socialMetaCurrentUrl')) {
+    function socialMetaDetectedScheme(): string
+    {
+        $forwardedProto = strtolower((string) ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? ''));
+        if ($forwardedProto === 'https') {
+            return 'https';
+        }
+        $requestScheme = strtolower((string) ($_SERVER['REQUEST_SCHEME'] ?? ''));
+        if ($requestScheme === 'https') {
+            return 'https';
+        }
+        $https = strtolower((string) ($_SERVER['HTTPS'] ?? ''));
+        if ($https !== '' && $https !== 'off' && $https !== '0') {
+            return 'https';
+        }
+        return 'http';
+    }
+
     function socialMetaCurrentUrl(array $siteConfig): string
     {
-        $scheme = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+        $scheme = socialMetaDetectedScheme();
         $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
         $uri = $_SERVER['REQUEST_URI'] ?? '/';
         if (!empty($siteConfig['base_url'])) {
@@ -41,8 +58,10 @@ if (isset($article_meta) && is_array($article_meta) && $article_meta !== []) {
 $title = trim((string) ($meta['title'] ?? $defaultTitle));
 $description = trim((string) ($meta['description'] ?? $defaultDescription));
 $image = trim((string) ($meta['image'] ?? $defaultImage));
+$video = trim((string) ($meta['video'] ?? ''));
+$videoType = trim((string) ($meta['video_type'] ?? 'video/mp4'));
 $type = trim((string) ($meta['type'] ?? 'website'));
-$url = socialMetaCurrentUrl($siteConfig);
+$url = trim((string) ($meta['url'] ?? socialMetaCurrentUrl($siteConfig)));
 
 if ($title === '') {
     $title = $defaultTitle;
@@ -55,7 +74,19 @@ if ($image === '') {
 }
 
 if (!preg_match('#^https?://#i', $image)) {
-    $image = '/' . ltrim($image, '/');
+    $scheme = socialMetaDetectedScheme();
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $image = $scheme . '://' . $host . '/' . ltrim($image, '/');
+}
+if (!preg_match('#^https?://#i', $url)) {
+    $scheme = socialMetaDetectedScheme();
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $url = $scheme . '://' . $host . '/' . ltrim($url, '/');
+}
+if ($video !== '' && !preg_match('#^https?://#i', $video)) {
+    $scheme = socialMetaDetectedScheme();
+    $host = $_SERVER['HTTP_HOST'] ?? 'localhost';
+    $video = $scheme . '://' . $host . '/' . ltrim($video, '/');
 }
 ?>
 <meta name="description" content="<?= socialMetaEsc($description) ?>">
@@ -68,6 +99,11 @@ if (!preg_match('#^https?://#i', $image)) {
 <meta property="og:site_name" content="<?= socialMetaEsc((string) $siteConfig['site_name']) ?>">
 <?php endif; ?>
 <meta property="og:locale" content="fr_FR">
+<?php if ($video !== ''): ?>
+<meta property="og:video" content="<?= socialMetaEsc($video) ?>">
+<meta property="og:video:secure_url" content="<?= socialMetaEsc($video) ?>">
+<meta property="og:video:type" content="<?= socialMetaEsc($videoType) ?>">
+<?php endif; ?>
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="<?= socialMetaEsc($title) ?>">
@@ -76,4 +112,3 @@ if (!preg_match('#^https?://#i', $image)) {
 <?php if (!empty($siteConfig['twitter_at'])): ?>
 <meta name="twitter:site" content="<?= socialMetaEsc((string) $siteConfig['twitter_at']) ?>">
 <?php endif; ?>
-

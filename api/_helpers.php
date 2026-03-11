@@ -2,7 +2,6 @@
 declare(strict_types=1);
 
 require_once __DIR__ . '/../includes/db.php';
-require_once __DIR__ . '/../Admin/includes/admin_auth.php';
 require_once __DIR__ . '/../includes/csrf.php';
 
 function jsonResponse(array $payload, int $status = 200): void
@@ -284,6 +283,12 @@ function resolveCartonPriceCents(PDO $pdo, array $variant, int $cartonsQty): int
 
 function requireAdminApi(array $allowedRoles = ['operator', 'manager', 'admin']): array
 {
+    $adminAuthPath = __DIR__ . '/../Admin/includes/admin_auth.php';
+    if (!is_file($adminAuthPath)) {
+        jsonResponse(['error' => 'Admin auth module missing'], 500);
+    }
+    require_once $adminAuthPath;
+
     $user = adminCurrentUser();
     if (!$user) {
         jsonResponse(['error' => 'Unauthorized'], 401);

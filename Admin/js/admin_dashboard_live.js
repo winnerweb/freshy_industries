@@ -148,6 +148,38 @@
     }
   };
 
+  const getChartTickLayout = (labelCount) => {
+    const viewport = Math.max(320, window.innerWidth || 1024);
+    const isMobile = viewport <= 560;
+    const isTablet = viewport <= 900;
+
+    if (isMobile) {
+      return {
+        autoSkip: false,
+        maxTicksLimit: labelCount,
+        maxRotation: 55,
+        minRotation: 55,
+        fontSize: 11,
+      };
+    }
+    if (isTablet) {
+      return {
+        autoSkip: true,
+        maxTicksLimit: Math.min(8, Math.max(5, labelCount)),
+        maxRotation: 28,
+        minRotation: 28,
+        fontSize: 13,
+      };
+    }
+    return {
+      autoSkip: false,
+      maxTicksLimit: labelCount,
+      maxRotation: 0,
+      minRotation: 0,
+      fontSize: 14,
+    };
+  };
+
   const renderChart = (labels, achatsSeries, ventesSeries) => {
     const canvas = document.getElementById('salesChart');
     if (!canvas || typeof window.Chart === 'undefined') return;
@@ -162,11 +194,17 @@
     const rawTop = hasData ? Math.ceil(maxValue * 1.15) : 60000;
     const yMax = Math.max(10000, Math.ceil(rawTop / 1000) * 1000);
     const yStep = Math.max(1000, Math.ceil((yMax - yMin) / 6 / 1000) * 1000);
+    const tickLayout = getChartTickLayout(nextLabels.length);
 
     if (state.chartInstance) {
       state.chartInstance.data.labels = nextLabels;
       state.chartInstance.data.datasets[0].data = nextAchats;
       state.chartInstance.data.datasets[1].data = nextVentes;
+      state.chartInstance.options.scales.x.ticks.autoSkip = tickLayout.autoSkip;
+      state.chartInstance.options.scales.x.ticks.maxTicksLimit = tickLayout.maxTicksLimit;
+      state.chartInstance.options.scales.x.ticks.maxRotation = tickLayout.maxRotation;
+      state.chartInstance.options.scales.x.ticks.minRotation = tickLayout.minRotation;
+      state.chartInstance.options.scales.x.ticks.font.size = tickLayout.fontSize;
       state.chartInstance.options.scales.y.min = yMin;
       state.chartInstance.options.scales.y.max = yMax;
       state.chartInstance.options.scales.y.ticks.stepSize = yStep;
@@ -190,7 +228,7 @@
         labels: monthLabels,
         datasets: [
           {
-            label: 'Achats',
+            label: 'Commandes',
             data: achats,
             backgroundColor: '#23245d',
             borderColor: '#23245d',
@@ -248,9 +286,11 @@
             border: { display: false },
             ticks: {
               color: tickColor,
-              maxRotation: 0,
-              autoSkip: false,
-              font: { size: 14, family: 'Poppins, sans-serif', weight: 500 },
+              maxRotation: tickLayout.maxRotation,
+              minRotation: tickLayout.minRotation,
+              autoSkip: tickLayout.autoSkip,
+              maxTicksLimit: tickLayout.maxTicksLimit,
+              font: { size: tickLayout.fontSize, family: 'Poppins, sans-serif', weight: 500 },
               padding: 8,
             },
           },
@@ -630,6 +670,22 @@
     document.addEventListener('admin:theme-changed', (event) => {
       const theme = String(event?.detail?.theme || 'light');
       state.prefs.theme = theme === 'dark' ? 'dark' : 'light';
+    });
+
+    let resizeTimer = null;
+    window.addEventListener('resize', () => {
+      if (!state.chartInstance) return;
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(() => {
+        const labels = state.chartInstance?.data?.labels || [];
+        const tickLayout = getChartTickLayout(Array.isArray(labels) ? labels.length : 0);
+        state.chartInstance.options.scales.x.ticks.autoSkip = tickLayout.autoSkip;
+        state.chartInstance.options.scales.x.ticks.maxTicksLimit = tickLayout.maxTicksLimit;
+        state.chartInstance.options.scales.x.ticks.maxRotation = tickLayout.maxRotation;
+        state.chartInstance.options.scales.x.ticks.minRotation = tickLayout.minRotation;
+        state.chartInstance.options.scales.x.ticks.font.size = tickLayout.fontSize;
+        state.chartInstance.update('none');
+      }, 120);
     });
   };
 

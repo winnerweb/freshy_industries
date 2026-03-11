@@ -1,5 +1,5 @@
-﻿<?php
-$page_title = '?picerie du terroir';
+<?php
+$page_title = 'Épicerie du terroir';
 $additional_css = [];
 include 'includes/header.php';
 ?>
@@ -7,38 +7,38 @@ include 'includes/header.php';
     <section class="hero-section">
       <div
         class="marquee"
-        aria-label="Livraison gratuite ? partir de 10000 Fcfa"
+        aria-label="Livraison gratuite à partir de 10000 Fcfa"
       >
         <div class="marquee-track">
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
           <span class="marquee-item"
-            >Livraison gratuite ? partir de <strong>10000 Fcfa</strong></span
+            >Livraison gratuite à partir de <strong>10000 Fcfa</strong></span
           >
         </div>
       </div>
       <div class="hero-visual">
         <div class="hero-overlay">
-          <h1>Epicerie du terroir</h1>
+          <h1>Épicerie du terroir</h1>
         </div>
       </div>
     </section>
@@ -54,7 +54,7 @@ include 'includes/header.php';
         </div>
     </section>
 
-    <section class="products-grid-section" aria-label="S?lection ?picerie du terroir" >
+    <section class="products-grid-section" aria-label="Sélection Épicerie du terroir" >
             <div class="products-grid" data-catalog-source="products-api" data-catalog-context="epicerie-main">
                 <p class="panier-empty" data-catalog-loading="true">Chargement des produits...</p>
             
@@ -169,7 +169,7 @@ include 'includes/header.php';
                       <span class="value" id="recapTotalProducts">0</span> 
                   </div>
                   <div class="recap-row">
-                      <span class="label">Exp?dition</span>
+                      <span class="label">Expédition</span>
                       <span class="value" id="recapShippingNeighborhood">**********</span> 
                   </div>
               </div>
@@ -339,7 +339,7 @@ include 'includes/header.php';
             Fait seulement ? base de noix de palme, notre cr?me est naturelle et
             sans additif. V?ritable alli? pour vos mets rapides et sans tapage,
             elle conserve toute la richesse aromatique des noix soigneusement
-            s?lectionn?es.
+            Sélectionn?es.
           </p>
           <div
             class="format-selector"
@@ -381,7 +381,7 @@ include 'includes/header.php';
         Vous aimeriez aussi ces produits
       </h2>
       
-      <section class="products-grid-section" aria-label="S?lection ?picerie du terroir">
+      <section class="products-grid-section" aria-label="Sélection Épicerie du terroir">
         <div class="carousel-container products-grid" data-catalog-source="products-api" data-catalog-context="epicerie-related" data-catalog-limit="4">
           <article class="product-card product-card--soldout">
                   <span class="product-card__badge--soldout badge--soldout"
@@ -515,6 +515,7 @@ include 'includes/header.php';
     
 
   <?php include 'includes/footer.php'; ?>
+
 
 
 

@@ -1,4 +1,4 @@
-﻿// Core JS (recovered minimal set)
+// Core JS (recovered minimal set)
 window.FreshyCart = window.FreshyCart || {};
 
 window.FreshyCart.loadItems = window.FreshyCart.loadItems || function () {
@@ -159,6 +159,7 @@ window.FreshyCart.applyServerCart = window.FreshyCart.applyServerCart || functio
   }
   window.FreshyCart.renderRecapSection?.();
   window.updateCheckoutState?.();
+  window.dispatchEvent(new CustomEvent('freshy:cart-updated', { detail: { items: mapped } }));
 
   return mapped;
 };
@@ -500,7 +501,10 @@ window.FreshyCart.buildModalItem = window.FreshyCart.buildModalItem || function 
           <span class="qty-value">${item.quantity}</span>
           <button class="qty-btn qty-increase">+</button>
         </div>
-        <button class="btn-supprimer">Supprimer</button>
+        <button class="btn-supprimer" type="button" aria-label="Supprimer ce produit du panier">
+          <i class="fa-regular fa-trash-can" aria-hidden="true"></i>
+          <span class="btn-supprimer__label">Supprimer</span>
+        </button>
       </div>
     </div>
   `;
@@ -761,9 +765,16 @@ window.FreshyPayment.startFedaPayCheckout = window.FreshyPayment.startFedaPayChe
   if (orderId <= 0) return { ok: false, error: 'invalid_order' };
 
   const response = await window.FreshyCart.postJsonWithCsrf('api/fedapay_checkout.php', { order_id: orderId });
-  const payload = await response.json();
+  const raw = await response.text();
+  let payload = {};
+  try {
+    payload = raw ? JSON.parse(raw) : {};
+  } catch (_) {
+    payload = {};
+  }
   if (!response.ok) {
-    return { ok: false, error: payload?.error || 'payment_init_failed' };
+    const detail = String(payload?.detail || '').trim();
+    return { ok: false, error: payload?.error || 'payment_init_failed', detail, status: response.status };
   }
   const checkoutUrl = String(payload?.data?.checkout_url || '');
   if (!checkoutUrl) {
@@ -793,8 +804,10 @@ window.FreshyCart.bindAddToCartHandlers = window.FreshyCart.bindAddToCartHandler
     }
   };
 
-  if (!cartModal || !modalCartItems) return;
-  window.toggleCartModal = toggleCartModal;
+  // Keep carton / mode handlers active even on pages without the cart modal (ex: panier.php).
+  if (cartModal && modalCartItems) {
+    window.toggleCartModal = toggleCartModal;
+  }
 
   const handleAddToCartClick = (event, button) => {
     event.preventDefault();
@@ -902,6 +915,44 @@ window.FreshyCart.bindAddToCartHandlers = window.FreshyCart.bindAddToCartHandler
 
     });
   };
+
+  // Delegation fallback for dynamically injected cards that may miss direct bindings.
+  if (!window.FreshyCart._cartonDelegationBound) {
+    window.FreshyCart._cartonDelegationBound = true;
+    document.addEventListener('click', (event) => {
+      const modeBtn = event.target.closest('.product-card [data-mode-btn]');
+      if (modeBtn) {
+        const card = modeBtn.closest('.product-card');
+        if (!card || card.dataset.purchaseModeBound === 'true') return;
+        const mode = String(modeBtn.getAttribute('data-mode-btn') || 'unit');
+        const unitBtn = card.querySelector('[data-mode-btn="unit"]');
+        const cartonBtn = card.querySelector('[data-mode-btn="carton"]');
+        const unitPanel = card.querySelector('[data-mode-panel="unit"]');
+        const cartonPanel = card.querySelector('[data-mode-panel="carton"]');
+        if (!unitBtn || !cartonBtn || !unitPanel || !cartonPanel) return;
+        const isCarton = mode === 'carton';
+        unitBtn.classList.toggle('is-active', !isCarton);
+        cartonBtn.classList.toggle('is-active', isCarton);
+        unitBtn.setAttribute('aria-selected', (!isCarton).toString());
+        cartonBtn.setAttribute('aria-selected', isCarton.toString());
+        unitPanel.classList.toggle('is-active', !isCarton);
+        cartonPanel.classList.toggle('is-active', isCarton);
+        return;
+      }
+
+      const cartonBtn = event.target.closest('.product-card__cta--carton');
+      if (!cartonBtn) return;
+      if (cartonBtn.dataset.cartonBound === 'true') return;
+      event.preventDefault();
+      const card = cartonBtn.closest('.product-card');
+      const payload = window.FreshyCart.buildCartonRequestFromCard(card);
+      if (!payload) {
+        window.FreshyCart.notify?.('warning', 'Format indisponible pour la commande en carton.');
+        return;
+      }
+      window.dispatchEvent(new CustomEvent('freshy:carton-order-request', { detail: payload }));
+    });
+  }
 
   const ensureCartonModal = () => {
     let modal = document.getElementById('cartonOrderModal');
@@ -1132,6 +1183,9 @@ window.FreshyCart.initCartPage = window.FreshyCart.initCartPage || function () {
   window.FreshyCart.bindCheckoutNavigation({ triggerSelector: '.footer-btn-verifier', targetSelector: '.page-container-flex' });
   window.FreshyCart.bindCartPageHandlers({ containerId: 'panierArticles', onUpdated: renderCartItems });
 
+  // Keep panier page synced with async cart updates (ex: add_carton flow).
+  window.addEventListener('freshy:cart-updated', renderCartItems);
+
   renderCartItems();
   window.FreshyCart.renderRecapSection();
 };
@@ -1150,7 +1204,7 @@ window.FreshyFilters.bindFilters = window.FreshyFilters.bindFilters || function 
   };
   const updateLabel = (count = 0) => {
     if (!label) return;
-    if (count > 0) { label.textContent = `Filtre : (${count})`; label.style.color = '#528007'; }
+    if (count > 0) { label.textContent = `Filtre : (${count})`; label.style.color = '#83BA3A'; }
     else { label.textContent = 'Filtre'; label.style.color = ''; }
   };
   updateLabel(0);
@@ -1969,9 +2023,21 @@ window.FreshyCheckout.initOrderForm = window.FreshyCheckout.initOrderForm || fun
       const orderData = payload?.data || {};
       const paymentResult = await window.FreshyPayment.startFedaPayCheckout(orderData);
       if (!paymentResult.ok) {
-        setMessage(paymentResult.error === 'payment_url_missing'
-          ? 'Paiement initialisé sans URL de redirection.'
-          : (paymentResult.error || 'Impossible de lancer le paiement FedaPay.'));
+        if (paymentResult.error === 'payment_url_missing') {
+          setMessage('Paiement initialisé sans URL de redirection.');
+        } else if (paymentResult.status === 422) {
+          setMessage(paymentResult.detail || paymentResult.error || 'Parametres de paiement invalides.');
+        } else if (paymentResult.status === 409) {
+          setMessage('Cette commande n’est plus payable.');
+        } else if (paymentResult.status === 500) {
+          const msg = paymentResult.detail || '';
+          const sdkMissing = /vendor\/autoload\.php|sdk missing|composer install/i.test(msg);
+          setMessage(sdkMissing
+            ? 'Paiement indisponible: SDK FedaPay non deployee sur le serveur.'
+            : (msg !== '' ? `Paiement indisponible: ${msg}` : 'Paiement indisponible (erreur serveur).'));
+        } else {
+          setMessage(paymentResult.error || 'Impossible de lancer le paiement FedaPay.');
+        }
         await window.FreshyCart.loadServerCart();
         return;
       }
@@ -2016,6 +2082,7 @@ window.FreshyCheckout.initOrderForm = window.FreshyCheckout.initOrderForm || fun
     initModules();
   }
 })();
+
 
 
 

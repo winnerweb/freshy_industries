@@ -29,7 +29,7 @@
   new window.Chart(canvas, {
     type: 'line',
     data: {
-      labels: ['Jan', 'FÃ©v', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'AoÃ»', 'Sep', 'Oct', 'Nov', 'DÃ©c'],
+      labels: ['Jan', 'Fév', 'Mar', 'Avr', 'Mai', 'Juin', 'Juil', 'Aoû', 'Sep', 'Oct', 'Nov', 'Déc'],
       datasets: [{
         label: 'Ventes',
         data: data.salesSeries || [],
@@ -48,4 +48,6 @@
     },
   });
 })();
+
+
 

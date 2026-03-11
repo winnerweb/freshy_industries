@@ -32,13 +32,13 @@
 
       const rows = Array.isArray(payload?.data) ? payload.data : [];
       if (!rows.length) {
-        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">Aucune commande trouvÃ©e.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="8" class="text-center text-muted py-4">Aucune commande trouvée.</td></tr>';
         return;
       }
 
       tbody.innerHTML = rows.map((row) => {
         const options = statuses.map((s) => `<option value="${s}" ${row.status === s ? 'selected' : ''}>${s}</option>`).join('');
-        const customer = [row.customer_name, row.customer_phone].filter(Boolean).join(' Â· ') || '-';
+        const customer = [row.customer_name, row.customer_phone].filter(Boolean).join(' · ') || '-';
         return `
           <tr data-order-id="${row.id}">
             <td>#${row.id}</td>
@@ -66,7 +66,7 @@
 
   const updateOrderStatus = async (orderId, status, button) => {
     if (!orderId || !statuses.includes(status)) {
-      notify('error', 'DonnÃ©es de statut invalides.');
+      notify('error', 'Données de statut invalides.');
       return;
     }
     button.disabled = true;
@@ -80,11 +80,11 @@
       });
       const payload = await response.json();
       if (!response.ok) {
-        throw new Error(payload?.error || 'Mise Ã  jour impossible');
+        throw new Error(payload?.error || 'Mise à jour impossible');
       }
-      notify('success', `Commande #${orderId} mise Ã  jour (${status}).`);
+      notify('success', `Commande #${orderId} mise à jour (${status}).`);
     } catch (error) {
-      notify('error', error.message || 'Erreur mise Ã  jour commande');
+      notify('error', error.message || 'Erreur mise à jour commande');
     } finally {
       button.disabled = false;
       button.textContent = initialLabel;
@@ -106,4 +106,6 @@
 
   loadOrders();
 })();
+
+
 

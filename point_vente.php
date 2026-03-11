@@ -34,7 +34,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -51,7 +51,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -68,7 +68,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -85,7 +85,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -102,7 +102,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -126,7 +126,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -143,7 +143,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -160,7 +160,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -177,7 +177,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -194,7 +194,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -218,7 +218,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -235,7 +235,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -252,7 +252,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -269,7 +269,7 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
@@ -286,11 +286,12 @@ include 'includes/header.php';
                     <h2>Supermarché EREVAN (Super U)</h2>
                     <p>Aéroport <br>01 BP 936 <br> Cotonou - Bénin  </p>
                     <p>Lundi au Vendredi 09h à 20h <br> Weekend 09h - 14H</p>
-                    <p><i class="fas fa-phone-alt" style="color: #8EC03B;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #8EC03B;"></i> Email : erevan@cotonou.com</p>
+                    <p><i class="fas fa-phone-alt" style="color: #83BA3A;"></i> Tel : 0167676767 <br> <i class="fas fa-envelope" style="color: #83BA3A;"></i> Email : erevan@cotonou.com</p>
                 </div>
             </div>
         </section>
 
         </div>
 <?php include 'includes/footer.php'; ?>
+
 

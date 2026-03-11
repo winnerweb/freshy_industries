@@ -41,6 +41,7 @@ $siteBase = rtrim($siteBase, '/');
 $backgroundUrl = ($siteBase !== '' ? $siteBase : '') . '/images/banniere_vente.webp';
 $logoUrl = ($siteBase !== '' ? $siteBase : '') . '/images/logo_freshy.webp';
 $videoUrl = adminResolveAuthVideoUrl($siteBase);
+$homeUrl = ($siteBase !== '' ? $siteBase : '') . '/index.php';
 
 $error = '';
 
@@ -100,6 +101,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     <div class="admin-password-overlay">
         <header class="admin-password-heading">
             <h1>Choisissez votre mot de passe</h1>
+            <p class="admin-auth-home-link">
+                <a href="<?php echo htmlspecialchars($homeUrl, ENT_QUOTES, 'UTF-8'); ?>">Retour a l'accueil</a>
+            </p>
         </header>
 
         <section class="admin-password-card" aria-labelledby="adminPasswordTitle">
@@ -127,8 +131,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                             aria-describedby="adminRegisterPasswordFieldError"
                             aria-invalid="false"
                         >
-                        <button type="button" class="admin-password-toggle" data-password-toggle="adminRegisterPassword" aria-label="Afficher ou masquer le mot de passe">
-                            <span aria-hidden="true">👁</span>
+                        <button type="button" class="admin-password-toggle" data-password-toggle="adminRegisterPassword" aria-label="Afficher le mot de passe" aria-pressed="false">
+                            <svg class="admin-password-toggle__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path class="admin-password-toggle__eye" d="M12 5C6.5 5 2 9.6 1 12c1 2.4 5.5 7 11 7s10-4.6 11-7c-1-2.4-5.5-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
+                                <circle class="admin-password-toggle__pupil" cx="12" cy="12" r="2.3"></circle>
+                                <path class="admin-password-toggle__slash" d="M3 4.5 20.5 22"></path>
+                            </svg>
                         </button>
                     </div>
                     <small id="adminRegisterPasswordFieldError" class="admin-password-field-error"></small>
@@ -148,8 +156,12 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
                             aria-describedby="adminRegisterPasswordConfirmFieldError"
                             aria-invalid="false"
                         >
-                        <button type="button" class="admin-password-toggle" data-password-toggle="adminRegisterPasswordConfirm" aria-label="Afficher ou masquer la confirmation">
-                            <span aria-hidden="true">👁</span>
+                        <button type="button" class="admin-password-toggle" data-password-toggle="adminRegisterPasswordConfirm" aria-label="Afficher la confirmation du mot de passe" aria-pressed="false">
+                            <svg class="admin-password-toggle__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                                <path class="admin-password-toggle__eye" d="M12 5C6.5 5 2 9.6 1 12c1 2.4 5.5 7 11 7s10-4.6 11-7c-1-2.4-5.5-7-11-7zm0 11a4 4 0 1 1 0-8 4 4 0 0 1 0 8z"></path>
+                                <circle class="admin-password-toggle__pupil" cx="12" cy="12" r="2.3"></circle>
+                                <path class="admin-password-toggle__slash" d="M3 4.5 20.5 22"></path>
+                            </svg>
                         </button>
                     </div>
                     <small id="adminRegisterPasswordConfirmFieldError" class="admin-password-field-error"></small>
@@ -184,3 +196,4 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     <script src="../js/admin_register_password_ui.js"></script>
 </body>
 </html>
+

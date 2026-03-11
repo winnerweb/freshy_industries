@@ -151,21 +151,17 @@ final class ProfileService
         $srcH = imagesy($resource);
         $targetSize = 320;
 
-        $ratio = min($targetSize / max($srcW, 1), $targetSize / max($srcH, 1));
-        $newW = max(1, (int) round($srcW * $ratio));
-        $newH = max(1, (int) round($srcH * $ratio));
         $dst = imagecreatetruecolor($targetSize, $targetSize);
         if (!$dst) {
             imagedestroy($resource);
             throw new RuntimeException('Creation image avatar impossible.');
         }
 
-        // White background for JPEG-like result while keeping predictable rendering.
-        $white = imagecolorallocate($dst, 255, 255, 255);
-        imagefilledrectangle($dst, 0, 0, $targetSize, $targetSize, $white);
-        $dstX = (int) floor(($targetSize - $newW) / 2);
-        $dstY = (int) floor(($targetSize - $newH) / 2);
-        imagecopyresampled($dst, $resource, $dstX, $dstY, 0, 0, $newW, $newH, $srcW, $srcH);
+        // Cover-crop to avoid letterboxing: any avatar fills its container.
+        $cropSide = max(1, min($srcW, $srcH));
+        $srcX = (int) floor(($srcW - $cropSide) / 2);
+        $srcY = (int) floor(($srcH - $cropSide) / 2);
+        imagecopyresampled($dst, $resource, 0, 0, $srcX, $srcY, $targetSize, $targetSize, $cropSide, $cropSide);
 
         $storageDir = dirname(__DIR__) . '/storage/profile_images';
         if (!is_dir($storageDir) && !mkdir($storageDir, 0775, true) && !is_dir($storageDir)) {

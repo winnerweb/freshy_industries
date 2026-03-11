@@ -1,6 +1,6 @@
-﻿:root {
+:root {
     --brand-green: #83BA3A;
-    --brand-green-rgb: 131, 181, 38;
+    --brand-green-rgb: 131, 186, 58;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
@@ -126,7 +126,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     padding: 40px 60px;
     /* border-radius: 8px; */
     color: white;
@@ -311,7 +311,7 @@ body {
     background: #000;
 }
 
-/* Bannière spécifique Freshy Palm - Importé de freshy_palm_page_style.css */
+/* Banniere sp�cifique Freshy Palm - Importe de freshy_palm_page_style.css */
 .freshy-palm-banner.freshy-palm-page {
     display: flex !important;
     width: 100% !important;
@@ -346,7 +346,7 @@ body {
     z-index: 2 !important;
 }
 
-/* Section texte spécifique Freshy Palm */
+/* Section texte sp�cifique Freshy Palm */
 .text-section.freshy-palm-page {
     max-width: 1145px ;
     margin: 50px auto ;
@@ -364,7 +364,7 @@ body {
     text-align: justify ;
 }
 
-/* Section produit spécifique Freshy Palm */
+/* Section produit sp�cifique Freshy Palm */
 .product-detail-section.freshy-palm-page {
     display: flex ;
     flex-wrap: wrap ;
@@ -427,7 +427,7 @@ body {
     background-color: #a33f7f;
 }
 
-/* Bannière spécifique Freshy Fruit Boosté - Importé de freshy_fruit_boosté.css */
+/* Banniere sp�cifique Freshy Fruit Booste - Importe de freshy_fruit_boost.css */
 .freshy-palm-banner.freshy-fruit-page {
     display: flex ;
     width: 100% ;
@@ -466,14 +466,14 @@ body {
     transform: translateX(-20%) !important;
 }
 
-/* Section texte spécifique Freshy Fruit Boosté */
+/* Section texte sp�cifique Freshy Fruit Booste */
 .text-section.freshy-fruit-page {
     max-width: 1145px;
     margin: 50px auto;
     padding: 20px;
     text-align: center;
     position: relative;
-    border-left: 5px solid #7E9C60 ;
+    border-left: 5px solid #83BA3A ;
     background-color: white;
 }
 
@@ -488,7 +488,7 @@ body {
     text-align: justify;
 }
 
-/* Section produit spécifique Freshy Fruit Boosté */
+/* Section produit sp�cifique Freshy Fruit Booste */
 .product-detail-section.freshy-fruit-page {
     display: flex ;
     max-width: 1144px ;
@@ -624,7 +624,7 @@ body {
 }
 
 .ville-link.active {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .ville-link:hover:not(.active) {
@@ -646,7 +646,7 @@ body {
 
 .supermarche-header h3 {
     font-size: 1.8em;
-    color: #8EC03B;
+    color: #83BA3A;
     margin-bottom: 10px;
     font-weight: 100;
 }
@@ -654,7 +654,7 @@ body {
 .header-underline {
     width: 100%;
     height: 1px;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
 }
 
 .supermarche-content {
@@ -708,7 +708,7 @@ body {
 
 
 
-/* Bannière spécifique Actualité - Importé de conseil_guide.css */
+/* Banniere sp�cifique Actualit� - Importe de conseil_guide.css */
 .freshy-palm-banner.actualite-page {
     display: flex !important;
     width: 117% !important;
@@ -741,14 +741,14 @@ body {
     z-index: 1 !important;
 }
 
-/* Section texte spécifique Actualité */
+/* Section texte sp�cifique Actualit� */
 .text-section.actualite-page {
     max-width: 800px !important;
     margin: 50px 171px !important;
     padding: 20px !important;
     text-align: center !important;
     position: relative !important;
-    border-left: 5px solid #7E9C60 !important;
+    border-left: 5px solid #83BA3A !important;
     background-color: white !important;
 }
 
@@ -762,7 +762,7 @@ body {
     width: 1084px !important;
 }
 
-/* Styles articles spécifiques Actualité */
+/* Styles articles sp�cifiques Actualit� */
 .back-link {
     display: flex;
     align-items: center;
@@ -927,7 +927,7 @@ body {
 
 .article-info.actualite-page {
     font-size: 0.9em !important;
-    color: #8EC03B !important;
+    color: #83BA3A !important;
     margin-bottom: 15px !important;
 }
 
@@ -1044,7 +1044,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(144, 238, 144, 0.5);
+    background-color: rgba(131, 186, 58, 0.5);
     /* Vert clair semi-transparent */
     z-index: 2;
     /* La superposition est au-dessus de l'image */
@@ -1052,7 +1052,7 @@ body {
 
 /* style section produits derives*/
 
-/* Section Produits Dérivés - Styles Originaux Complets */
+/* Section Produits Derives - Styles Originaux Complets */
 .section-container {
     padding: 50px 20px;
     text-align: center;
@@ -1145,7 +1145,7 @@ body {
     background-color: #a33f7f;
 }
 
-/* Styles Article Detail Page - Adaptés de conseil_guide.css */
+/* Styles Article Detail Page - Adapt�s de conseil_guide.css */
 .article-detail-page {
     max-width: 1189px;
     margin: 40px auto;
@@ -1245,14 +1245,14 @@ body {
 }
 
 .share-whatsapp {
-    background-color: #25d366;
+    background-color: #83BA3A;
 }
 
 .share-linkedin {
     background-color: #007bb5;
 }
 
-/* Styles Related Articles Carousel - Adaptés de conseil_guide.css */
+/* Styles Related Articles Carousel - Adapt�s de conseil_guide.css */
 .carousel-section {
     max-width: 1189px;
     margin: 50px auto;
@@ -1345,7 +1345,7 @@ body {
 
 .article-carousel-info {
     font-size: 0.85em;
-    color: #8EC03B;
+    color: #83BA3A;
     margin-bottom: 10px;
 }
 
@@ -1384,8 +1384,8 @@ body {
 }
 
 .btn-read-carousel-article:hover {
-    background-color: #8EC03B;
-    border-color: #8EC03B;
+    background-color: #83BA3A;
+    border-color: #83BA3A;
     color: white;
 }
 
@@ -1477,7 +1477,7 @@ body {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background-color: #057A55D9;
+    background-color: #83BA3AD9;
     /* Couleur de fond verte */
     display: flex;
     justify-content: center;
@@ -1763,7 +1763,7 @@ body {
 
 .nav-links a.active,
 .nav-links a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
     /* Couleur verte pour actif/survol */
 }
 
@@ -1774,7 +1774,7 @@ body {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
 }
 
 .dropdown {
@@ -1807,11 +1807,11 @@ body {
 }
 
 .nav-icon.active {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .nav-icon.active i {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .nav-icon.active::after {
@@ -1821,11 +1821,11 @@ body {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
 }
 
 .nav-icon:hover {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .btn-quote {
@@ -1865,7 +1865,7 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: #fff;
 }
 
@@ -1935,7 +1935,7 @@ body {
     transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     overflow-y: auto;
     will-change: transform;
-    /* Position initiale : cachée à gauche */
+    /* Position initiale : cach�e  a gauche */
     transform: translateX(-350px);
 }
 
@@ -1998,14 +1998,14 @@ body {
 /* Effets hover */
 .sidebar-nav a:hover {
     background-color: #f0f0f0;
-    color: #8EC03B;
+    color: #83BA3A;
     padding-left: 25px;
     transform: translateX(5px);
 }
 
 /* Etats actifs */
 .sidebar-link.active {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -2021,7 +2021,7 @@ body {
 }
 
 .sidebar-link.active:hover {
-    background-color: #7ab02f;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -2063,7 +2063,7 @@ body {
 }
 
 .sidebar-dropdown-content a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
     background-color: #f9f9f9;
 }
 
@@ -2192,7 +2192,7 @@ body {
 }
 
 .share-whatsapp {
-    background-color: #25d366;
+    background-color: #83BA3A;
 }
 
 .share-email {
@@ -2277,7 +2277,7 @@ body {
 
 .article-carousel-info {
     font-size: 0.85em;
-    color: #8EC03B;
+    color: #83BA3A;
     margin-bottom: 10px;
 }
 
@@ -2316,8 +2316,8 @@ body {
 }
 
 .btn-read-carousel-article:hover {
-    background-color: #8EC03B;
-    border-color: #8EC03B;
+    background-color: #83BA3A;
+    border-color: #83BA3A;
     color: white;
 }
 
@@ -2735,7 +2735,7 @@ body {
 
     .newsletter-section {
         display: block;
-        background-color: #8EC03B;
+        background-color: #83BA3A;
         height: 200px;
     }
 
@@ -2958,7 +2958,7 @@ body {
     width: 100%;
     height: 250px; /* Adjust height as needed */
     margin-top: 80px; /* To clear fixed navbar */
-    background-image: url('../images/bannière_contact.webp');
+    background-image: url('../images/banniere_contact.webp');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -3003,7 +3003,7 @@ body {
 .form-title,
 .details-title {
     font-size: 1.5em;
-    color: #8EC03B;
+    color: #83BA3A;
     margin-bottom: 30px;
     text-align: left;
 }
@@ -3040,9 +3040,9 @@ body {
 .form-group input[type="number"]:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-    border-color: #8EC03B;
+    border-color: #83BA3A;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(142, 192, 59, 0.2);
+    box-shadow: 0 0 0 2px rgba(131, 186, 58, 0.2);
 }
 
 .btn-send-message {
@@ -3255,7 +3255,7 @@ body {
 .contact-form-container .form-title {
     font-size: 24px;
     font-weight: 600;
-    color: #8EC03B;
+    color: #83BA3A;
     margin-bottom: 16px;
 }
 
@@ -3507,7 +3507,7 @@ body {
 
 .global-search-suggestions button:hover,
 .global-search-suggestions button[aria-selected="true"] {
-    background: #f3f8ef;
+    background: #83BA3A;
 }
 
 .global-search-suggestion-type {
@@ -3535,7 +3535,7 @@ body {
     width: 100%;
     height: 373px;
     margin-top: 80px;
-    background-image: url('../images/Bannière devis.webp');
+    background-image: url('../images/Banniere devis.webp');
     background-size: cover;
     background-position: center;
     display: flex;
@@ -3576,7 +3576,7 @@ body {
 }
 
 .devis-form-container h2 {
-    color: #8EC03B;
+    color: #83BA3A;
     font-size: 2em;
     margin-bottom: 30px;
     text-align: left;
@@ -3651,7 +3651,7 @@ body {
 }
 
 .contact-info h3 {
-    color: #8EC03B;
+    color: #83BA3A;
     font-size: 1.8em;
     margin-bottom: 15px;
 }
@@ -3932,7 +3932,7 @@ body {
     }
 }
 
-/* ===== SECTION DÉTAIL PRODUIT (SECTION_CREME) - STYLES ORIGINAUX ===== */
+/* ===== SECTION D�TAIL PRODUIT (SECTION_CREME) - STYLES ORIGINAUX ===== */
 
 /* Variables CSS pour section_creme */
 :root {
@@ -3942,10 +3942,10 @@ body {
     --green: #83BA3A;
     --text: #374151;
     --muted: #374151;
-    --border: #528007;
+    --border: #83BA3A;
     --border_quantity: #d1d5db;
     --couleur-texte-principal: #333;
-    --couleur-vert-total: #528007;
+    --couleur-vert-total: #83BA3A;
     --couleur-bouton-verifier: #374151;
     --couleur-bordure: #ccc;
     --couleur-fond-bouton-qte: #fff;
@@ -4067,8 +4067,8 @@ body {
 }
 
 .format-button.active {
-    background: #528007;
-    border-color: #528007;
+    background: #83BA3A;
+    border-color: #83BA3A;
     color: #fff;
     border-radius: 8px;
 }
@@ -4126,7 +4126,7 @@ body {
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    color: #4b8a17;
+    color: #83BA3A;
     text-decoration: none;
     font-weight: 500;
     margin-bottom: 20px;
@@ -4134,7 +4134,7 @@ body {
 }
 
 .back-link:hover {
-    color: #3a6a12;
+    color: #83BA3A;
 }
 
 .back-link i {
@@ -4143,7 +4143,7 @@ body {
 
 /* Carousel controls - ORIGINAL */
 .creme-carousel-controls {
-    display: none; /* Caché par défaut */
+    display: none; /* Cache par d�faut */
     align-items: center;
     justify-content: center;
     gap: 16px;
@@ -4154,7 +4154,7 @@ body {
     width: 32px;
     height: 32px;
     background: #fff;
-    color: #7A937D;
+    color: #83BA3A;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -4176,15 +4176,15 @@ body {
     width: 8px;
     height: 8px;
     border-radius: 999px;
-    border: 1px solid #7A937D;
+    border: 1px solid #83BA3A;
     background: #ffffff;
     padding: 0;
     cursor: pointer;
 }
 
 .creme-carousel-dot.active {
-    background: #4b8a17;
-    border-color: #4b8a17;
+    background: #83BA3A;
+    border-color: #83BA3A;
 }
 /* ===== PAGE EPICERIE TERROIRE ===== */
 /* Import Google Fonts */
@@ -4205,7 +4205,7 @@ body {
 
 /* Responsive styles originaux pour section_creme */
 @media (max-width: 599px) {
-    /* Cache la liste de vignettes dans la section crème sur mobile */
+    /* Cache la liste de vignettes dans la section cr�me sur mobile */
     .thumbnail-list {
         display: none;
     }
@@ -4214,7 +4214,7 @@ body {
         display: none;
     }
 
-    /* Carousel mobile pour la crème dans #section_creme */
+    /* Carousel mobile pour la cr�me dans #section_creme */
 
     .format-selector{
         margin-left: 5px;
@@ -4295,7 +4295,7 @@ body {
         margin-top: 72px;
     }
 
-    /* On masque les visuels supplémentaires en dessous sur mobile,
+    /* On masque les visuels suppl�mentaires en dessous sur mobile,
        ils servent uniquement de source d'images pour le carousel JS */
     #section_creme > .visual-panel {
         display: none;
@@ -4371,7 +4371,7 @@ body {
     }
 }
 
-/* ===== PAGE INDEX.PHP - CONSOLIDATION COMPLÈTE ===== */
+/* ===== PAGE INDEX.PHP - CONSOLIDATION COMPLETE ===== */
 
 /* Navigation et Menu Burger - Styles Originaux */
 .navbar {
@@ -4431,7 +4431,7 @@ body {
 
 .nav-links a.active,
 .nav-links a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .nav-links a.active::after {
@@ -4441,7 +4441,7 @@ body {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
 }
 
 .dropdown {
@@ -4472,7 +4472,7 @@ body {
 }
 
 .nav-icon:hover {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .btn-quote {
@@ -4508,7 +4508,7 @@ body {
 }
 
 .dropdown-content a:hover {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: #fff;
 }
 
@@ -4557,7 +4557,7 @@ body {
     backdrop-filter: blur(2px);
 }
 
-/* Section Catégories */
+/* Section Categories */
 .product-categories {
     display: flex;
     justify-content: center;
@@ -4705,7 +4705,7 @@ body {
     width: 250px;
     height: 250px;
     border-radius: 50%;
-    background-color: #057A55D9;
+    background-color: #83BA3AD9;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -4874,7 +4874,7 @@ body {
     background-color: #a33f7f;
 }
 
-/* Styles Article Detail Page - Adaptés de conseil_guide.css */
+/* Styles Article Detail Page - Adapt�s de conseil_guide.css */
 .article-detail-page {
     max-width: 1189px;
     margin: 133px auto;;
@@ -4977,14 +4977,14 @@ body {
 }
 
 .share-whatsapp {
-    background-color: #25d366;
+    background-color: #83BA3A;
 }
 
 .share-linkedin {
     background-color: #007bb5;
 }
 
-/* Styles Related Articles Carousel - Adaptés de conseil_guide.css */
+/* Styles Related Articles Carousel - Adapt�s de conseil_guide.css */
 .carousel-section {
     max-width: 1189px;
     margin: 50px auto;
@@ -5061,7 +5061,7 @@ body {
 
 .article-carousel-info {
     font-size: 0.85em;
-    color: #8EC03B;
+    color: #83BA3A;
     margin-bottom: 10px;
 }
 
@@ -5100,8 +5100,8 @@ body {
 }
 
 .btn-read-carousel-article:hover {
-    background-color: #8EC03B;
-    border-color: #8EC03B;
+    background-color: #83BA3A;
+    border-color: #83BA3A;
     color: white;
 }
 
@@ -5182,7 +5182,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(144, 238, 144, 0.5);
+    background-color: rgba(131, 186, 58, 0.5);
     z-index: 2;
 }
 
@@ -5221,7 +5221,7 @@ body {
 .article-info span {
     font-size: 14px;
     font-weight: 500;
-    color: #528007;
+    color: #83BA3A;
 }
 
 .btn-read-article {
@@ -5254,7 +5254,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     padding: 40px 60px;
     color: white;
     height: 157px;
@@ -5349,13 +5349,13 @@ body {
 /* Effets hover */
 .sidebar-nav a:hover {
     background-color: #f0f0f0;
-    color: #8EC03B;
+    color: #83BA3A;
     padding-left: 25px;
 }
 
-/* États actifs */
+/* �tats actifs */
 .sidebar-link.active {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -5366,12 +5366,12 @@ body {
     top: 0;
     bottom: 0;
     width: 4px;
-    background-color: #6b9a2a;
+    background-color: #83BA3A;
     border-radius: 0 4px 4px 0;
 }
 
 .sidebar-link.active:hover {
-    background-color: #7ab02f;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -5413,7 +5413,7 @@ body {
 }
 
 .sidebar-dropdown-content a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
     background-color: #f9f9f9;
 }
 
@@ -5598,7 +5598,7 @@ body {
     }
 }
 
-/* Responsive - Grid Verticale Centrée */
+/* Responsive - Grid Verticale Centr�e */
 @media (max-width: 1024px) {
     .product-grid {
         width: auto !important;
@@ -5696,7 +5696,7 @@ body {
         text-align: justify;
     }
     
-    /* Afficher les flèches seulement sur mobile / tablette */
+    /* Afficher les fl�ches seulement sur mobile / tablette */
     .category-slider-arrow {
         display: flex;
     }
@@ -5734,14 +5734,14 @@ body {
         display: none;
     }
 
-    /* Icônes panier + recherche alignées à droite */
+    /* Icones panier + recherche align�es  a droite */
     .navbar-right {
         display: flex;
         align-items: center;
         gap: 12px;
     }
 
-    /* Cacher le texte des liens nav-icon et garder seulement l'icône */
+    /* Cacher le texte des liens nav-icon et garder seulement l'icone */
     .navbar-right .nav-icon {
         font-size: 0;
         display: inline-flex;
@@ -5754,7 +5754,7 @@ body {
         margin: 0;
     }
 
-    /* Masquer le bouton devis sur mobile pour alléger la barre */
+    /* Masquer le bouton devis sur mobile pour all�ger la barre */
     .btn-quote {
         display: none;
     }
@@ -5796,7 +5796,7 @@ body {
         font-size: 20px;
     }
     
-    /* Slider de catégories en plein écran */
+    /* Slider de cat�gories en plein �cran */
     .product-categories {
         position: relative;
         overflow: hidden;
@@ -5938,7 +5938,7 @@ body {
     
     .newsletter-section {
         display: block;
-        background-color: #8EC03B;
+        background-color: #83BA3A;
         height: 200px;
     }
     
@@ -5991,7 +5991,7 @@ body {
         width: 100% !important;
     }
     
-    /* About section : sur petits écrans, afficher l'image avant le texte */
+    /* About section : sur petits �crans, afficher l'image avant le texte */
     .about-section .row {
         display: flex;
         flex-direction: column-reverse;
@@ -6003,7 +6003,7 @@ body {
     }
 }
 
-/* Menu burger et navigation mobile (pour écrans entre 600px et 768px) */
+/* Menu burger et navigation mobile (pour �crans entre 600px et 768px) */
 @media (max-width: 768px) {
     .menu-toggle {
         display: block;
@@ -6041,7 +6041,7 @@ body {
         font-size: 18px;
     }
     
-    /* Slider de catégories en plein écran */
+    /* Slider de cat�gories en plein �cran */
     .product-categories {
         position: relative;
         overflow: hidden;
@@ -6188,7 +6188,7 @@ body {
     
     .newsletter-section {
         display: block;
-        background-color: #8EC03B;
+        background-color: #83BA3A;
         height: 320px;
     }
     
@@ -6241,7 +6241,7 @@ body {
         width: 100% !important;
     }
     
-    /* About section : sur petits écrans, afficher l'image avant le texte */
+    /* About section : sur petits �crans, afficher l'image avant le texte */
     .about-section .row {
         display: flex;
         flex-direction: column-reverse;
@@ -6347,7 +6347,7 @@ body {
         align-items: center;
         justify-content: center;
         background: linear-gradient(#01043DCC, #01043DCC),
-        url("../images/bannière terroire.webp") center/cover no-repeat;
+        url("../images/banniere_terroire.webp") center/cover no-repeat;
         margin: 50px 0;
     }
     
@@ -6383,7 +6383,7 @@ body {
     }
 }
 
-/* Grands écrans */
+/* Grands �crans */
 @media (min-width: 1081px) {
     .sidebar,
     .overlay {
@@ -6418,13 +6418,13 @@ body {
     }
 }
 
-/* Variables CSS supplémentaires */
+/* Variables CSS suppl�mentaires */
 :root {
     --muted: #374151;
-    --border: #528007;
+    --border: #83BA3A;
     --border_quantity: #d1d5db;
     --couleur-texte-principal: #333;
-    --couleur-vert-total: #528007;
+    --couleur-vert-total: #83BA3A;
     --couleur-bouton-verifier: #374151;
     --couleur-bordure: #ccc;
     --couleur-fond-bouton-qte: #fff;
@@ -6482,7 +6482,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
 }
 
 .marquee {
-    background-color: #3a8b1d;
+    background-color: #83BA3A;
     color: #fff;
     overflow: hidden;
     position: relative;
@@ -6521,7 +6521,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
     align-items: center;
     justify-content: center;
     background: linear-gradient(#01043DCC, #01043DCC),
-    url("../images/bannière terroire.webp") center/cover no-repeat;
+    url("../images/banniere_terroire.webp") center/cover no-repeat;
     margin: 50px 0;
 }
 
@@ -6568,7 +6568,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
 }
 
 .filtre.active .texte {
-    color: #3AA23A;
+    color: #83BA3A;
     font-weight: 600;
 }
 
@@ -6577,7 +6577,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
     display: inline-block;
     width: 6px;
     height: 6px;
-    background-color: #3AA23A;
+    background-color: #83BA3A;
     border-radius: 50%;
     margin-left: 5px;
     opacity: 0;
@@ -6783,7 +6783,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
 }
 
 .option-item.active {
-    color: #3AA23A;
+    color: #83BA3A;
     font-weight: 600;
 }
 
@@ -6796,7 +6796,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
     transform: translateY(-50%);
     width: 8px;
     height: 8px;
-    background-color: #3AA23A;
+    background-color: #83BA3A;
     border-radius: 50%;
     z-index: 1;
 }
@@ -6813,7 +6813,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
 }
 
 .option-item-trier.active {
-    color: #2f8f2f;
+    color: #83BA3A;
     font-weight: 600;
 }
 
@@ -6827,7 +6827,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
     border: 0;
     border-radius: 50%;
     background: transparent;
-    color: #2f8f2f;
+    color: #83BA3A;
     cursor: pointer;
     display: none;
     align-items: center;
@@ -6841,7 +6841,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
 
 .sort-reset-btn:hover,
 .sort-reset-btn:focus-visible {
-    background: rgba(47, 143, 47, 0.14);
+    background: rgba(131, 186, 58, 0.14);
     outline: none;
 }
 
@@ -7148,7 +7148,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
     transform: translate(-50%, 0);
 }
 
-/* Produits en rupture - bouton désactivé uniquement au hover */
+/* Produits en rupture - bouton desactive uniquement au hover */
 .product-card--soldout:hover .product-card__cta {
     opacity: 0.6;
     cursor: not-allowed;
@@ -7157,7 +7157,7 @@ body:has(.panier-hero-visual) .panier-hero-visual {
     color: #999 !important;
 }
 
-/* Produits en rupture - select reste toujours actif (pas de désactivation) */
+/* Produits en rupture - select reste toujours actif (pas de desactivation) */
 
 .product-card__select {
     width: 100%;
@@ -7444,13 +7444,13 @@ body.has-carton-modal {
     border-radius: 999px;
     font-size: 12px;
     font-weight: 600;
-    color: #03543F;
+    color: white;
     z-index: 3;
     border-radius: 7px;
 }
 
 .badge--new {
-    background: #DEF7EC;
+    background: #83BA3A;
 }
 
 .badge--soldout {
@@ -7631,13 +7631,13 @@ body.has-carton-modal {
 
 .sidebar-nav a:hover {
     background-color: #f0f0f0;
-    color: #8EC03B;
+    color: #83BA3A;
     padding-left: 25px;
     transform: translateX(5px);
 }
 
 .sidebar-link.active {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -7653,7 +7653,7 @@ body.has-carton-modal {
 }
 
 .sidebar-link.active:hover {
-    background-color: #7ab02f;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -7694,7 +7694,7 @@ body.has-carton-modal {
 }
 
 .sidebar-dropdown-content a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
     background-color: #f9f9f9;
 }
 
@@ -7776,12 +7776,12 @@ body.has-carton-modal {
 .article-info span {
     font-size: 14px;
     font-weight: 500;
-    color: #528007;
+    color: #83BA3A;
 }
 
 .article-info span:not(:last-child)::after {
     content: " | ";
-    color: #8EC03B;
+    color: #83BA3A;
     font-weight: 500;
     margin: 0 5px;
 }
@@ -7814,7 +7814,7 @@ body.has-carton-modal {
     font-weight: 500;
     font-size: 11px;
     margin-bottom: 5px;
-    color: #528007;
+    color: #83BA3A;
 }
 .article-poids,
 .article-prix-unite {
@@ -7924,7 +7924,7 @@ body.has-carton-modal {
         height: 300px;
     }
     /* Panier mobile (panier.php) */
-    .enregistré {
+    .enregistr� {
         margin-top: 0 !important;
     }
 
@@ -8026,7 +8026,7 @@ body.has-carton-modal {
     .footer-total {
         font-size: 16px;
         font-weight: 600;
-        color: #4b8a17;
+        color: #83BA3A;
         margin-bottom: 20px;
     }
 
@@ -8038,7 +8038,7 @@ body.has-carton-modal {
     }
 
     /* Carousel mobile pour panier.php */
-    .enregistré .carousel-header {
+    .enregistr� .carousel-header {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -8046,18 +8046,18 @@ body.has-carton-modal {
         padding: 0 12px;
     }
 
-    .enregistré .carousel-header h2 {
+    .enregistr� .carousel-header h2 {
         font-size: 18px;
         font-weight: 600;
         margin: 0;
     }
 
-    .enregistré .carousel-navigation {
+    .enregistr� .carousel-navigation {
         display: flex;
         gap: 12px;
     }
 
-    .enregistré .carousel-arrow {
+    .enregistr� .carousel-arrow {
         width: 32px;
         height: 32px;
         border-radius: 999px;
@@ -8069,7 +8069,7 @@ body.has-carton-modal {
         color: #555;
     }
 
-    .enregistré .carousel-container.products-grid {
+    .enregistr� .carousel-container.products-grid {
         display: flex;
         overflow-x: auto;
         gap: 16px;
@@ -8079,11 +8079,11 @@ body.has-carton-modal {
         scrollbar-width: none;
     }
 
-    .enregistré .carousel-container.products-grid::-webkit-scrollbar {
+    .enregistr� .carousel-container.products-grid::-webkit-scrollbar {
         display: none;
     }
 
-    .enregistré .product-card {
+    .enregistr� .product-card {
         flex: 0 0 auto;
         width: 282px;
         scroll-snap-align: start;
@@ -8266,7 +8266,7 @@ body.has-carton-modal {
         row-gap: 17px;
     }
 
-    /* Styles spécifiques pour le bouton de fermeture sur mobile */
+    /* Styles sp�cifiques pour le bouton de fermeture sur mobile */
     .close-button {
         /* background-color: rgba(0, 0, 0, 0.05); */
         min-width: 44px;
@@ -8340,7 +8340,7 @@ body.has-carton-modal {
 
     .product-card__overlay {
         position: absolute;
-        top: 130px;
+        top: 117px;
         left: 50%;
         transform: translateX(-50%);
     }
@@ -8461,7 +8461,7 @@ body.has-carton-modal {
 
     .marquee {
         position: relative;
-        top: 88px;
+        top: 46px;
         margin-bottom: 10px;
     }
 
@@ -8470,10 +8470,10 @@ body.has-carton-modal {
     }
 
     .hero-visual {
-        margin: 78px 0 16px;
+        margin: 36px 0 16px;
         padding: 16px 12px;
         background: linear-gradient(#01043DCC, #01043DCC),
-                    url("../images/bannière terroire.webp") center/cover no-repeat;
+                    url("../images/banniere_terroire.webp") center/cover no-repeat;
         align-items: center;
         justify-content: center;
     }
@@ -8554,6 +8554,10 @@ body.has-carton-modal {
         object-fit: cover;
         z-index: 1;
     }
+    .product-card h3{ 
+        position: relative;
+        right: 20px;
+    }
 }
 
 @keyframes modal-bottom-sheet-up {
@@ -8565,7 +8569,7 @@ body.has-carton-modal {
     }
 }
 
-/* Section partage - Icônes uniquement sur mobile + Responsive Actualité */
+/* Section partage - Icones uniquement sur mobile + Responsive Actualit� */
 @media (max-width: 599px) {
     .share-section {
         display: flex;
@@ -8611,7 +8615,7 @@ body.has-carton-modal {
         display: none;
     }
     
-    /* Responsive spécifique pour la page Actualité */
+    /* Responsive sp�cifique pour la page Actualit� */
     .freshy-palm-banner.actualite-page {
         display: flex !important;
         width: 135% !important;
@@ -8719,7 +8723,7 @@ body.has-carton-modal {
     
     .share-facebook { background-color: #1877F2; }
     .share-x { background-color: #000000; }
-    .share-whatsapp { background-color: #25D366; }
+    .share-whatsapp { background-color: #83BA3A; }
     .share-email { background-color: #0A66C2; }
     
     .share-text {
@@ -8754,7 +8758,7 @@ body.has-carton-modal {
 
 }    
     
-    /* Responsive spécifique pour Freshy Palm Page - Importé de freshy_palm_page_style.css */
+    /* Responsive sp�cifique pour Freshy Palm Page - Importe de freshy_palm_page_style.css */
 @media (max-width: 1024px) {
     .freshy-palm-banner.freshy-palm-page {
         height: 280px;
@@ -8838,7 +8842,7 @@ body.has-carton-modal {
     }
 }
 
-/* Responsive spécifique pour Freshy Fruit Boosté Page - Importé de freshy_fruit_boosté.css */
+/* Responsive sp�cifique pour Freshy Fruit Booste Page - Importe de freshy_fruit_boost.css */
 @media (max-width: 599px) {
     
     .freshy-palm-banner.freshy-fruit-page {
@@ -8930,8 +8934,8 @@ body.has-carton-modal {
         width: 100% !important;
     }
 }    
-    /* Styles spécifiques Point Vente - Importé de point_vente_style.css */
-    /* Styles DESKTOP par défaut */
+    /* Styles sp�cifiques Point Vente - Importe de point_vente_style.css */
+    /* Styles DESKTOP par d�faut */
 .point-vente-banner {
     width: 100% !important;
     height: 250px !important;
@@ -8987,7 +8991,7 @@ body.has-carton-modal {
 }
 
 .ville-link.active {
-    color: #8EC03B !important;
+    color: #83BA3A !important;
 }
 
 .ville-link:hover:not(.active) {
@@ -9009,7 +9013,7 @@ body.has-carton-modal {
 
 .supermarche-header h3 {
     font-size: 1.8em !important;
-    color: #8EC03B !important;
+    color: #83BA3A !important;
     margin-bottom: 10px !important;
     font-weight: 100 !important;
 }
@@ -9017,7 +9021,7 @@ body.has-carton-modal {
 .header-underline {
     width: 100% !important;
     height: 1px !important;
-    background-color: #8EC03B !important;
+    background-color: #83BA3A !important;
 }
 
 .supermarche-content {
@@ -9062,7 +9066,7 @@ body.has-carton-modal {
     margin-right: 10px !important;
 }
 
-/* Responsive spécifique pour Point Vente - TABLETTE */
+/* Responsive sp�cifique pour Point Vente - TABLETTE */
 @media (max-width: 1024px) and (min-width: 600px) {
     .supermarche-content {
         gap: 30px !important;
@@ -9074,7 +9078,7 @@ body.has-carton-modal {
     }
 }
 
-/* Responsive spécifique pour Point Vente - MOBILE uniquement */
+/* Responsive sp�cifique pour Point Vente - MOBILE uniquement */
 @media (max-width: 599px) {
     .point-vente-banner {
         width: 100% !important;
@@ -9142,16 +9146,16 @@ body.has-carton-modal {
     }
 }
 
-/* Media query pour les très grands écrans (> 1080px) */
+/* Media query pour les tr�s grands �crans (> 1080px) */
 @media (min-width: 1081px) {
-    /* S'assurer que la sidebar et l'overlay sont cachés sur desktop */
+    /* S'assurer que la sidebar et l'overlay sont caches sur desktop */
     .sidebar,
     .overlay {
         display: none !important;
     }
 }
 
-/* ===== CORRECTION CAROUSESEL ACTUALITÉS - SPÉCIFICITÉ MAXIMALE ===== */
+/* ===== CORRECTION CAROUSESEL ACTUALITES - SPECIFICITE MAXIMALE ===== */
 .carousel-section.related-articles-carousel .carousel-container {
     display: flex !important;
     gap: 30px !important;
@@ -9206,7 +9210,7 @@ body.has-carton-modal {
     /* Fait glisser la modale depuis la droite */
     z-index: 1000;
     font-family: 'Poppins', sans-serif;
-    /* Masquer par défaut */
+    /* Masquer par d�faut */
     /* display: none; */
 }
 
@@ -9214,21 +9218,21 @@ body.has-carton-modal {
     background-color: white;
     width: 100%;
     max-width: 450px;
-    /* Limite la largeur du panier sur grand écran */
+    /* Limite la largeur du panier sur grand ecran */
     height: 100vh;
     display: flex;
     flex-direction: column;
-    /* Ombre subtile sur le côté gauche */
+    /* Ombre subtile sur le c�t� gauche */
     box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
 }
 
-/* --- 1. En-tête --- */
+/* --- 1. En-t�te --- */
 .panier-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 20px 20px 20px 30px;
-    /* Plus de padding à gauche pour le titre */
+    /* Plus de padding  a gauche pour le titre */
     border-bottom: 1px solid #EBEBEB;
 }
 
@@ -9263,7 +9267,7 @@ body.has-carton-modal {
     width: 100px;
     /* Largeur de la zone image */
     height: 100px;
-    /* Hauteur pour être carré */
+    /* Hauteur pour etre carre */
     margin-right: 20px;
     border-radius: 4px;
     overflow: hidden;
@@ -9333,7 +9337,7 @@ body.has-carton-modal {
 .item-details {
     flex-grow: 1;
     display: grid;
-    /* Définit la grille : 2 colonnes (détails & prix) et les lignes pour les actions */
+    /* Definit la grille : 2 colonnes (details & prix) et les lignes pour les actions */
     grid-template-columns: 1fr 1fr;
     grid-template-rows: auto auto auto 1fr;
     /* 4 lignes : Nom, Poids, Prix, Actions */
@@ -9342,7 +9346,7 @@ body.has-carton-modal {
 
 .item-name {
     grid-column: 1 / 3;
-    /* Le nom s'étend sur les deux colonnes */
+    /* Le nom s'etend sur les deux colonnes */
     font-size: 16px;
     font-weight: 600;
     color: #172B4D;
@@ -9398,27 +9402,27 @@ body.has-carton-modal {
 
 .item-actions {
     grid-column: 1 / 2;
-    /* Contrôles de quantité sur la colonne 1 */
+    /* Controles de quantite sur la colonne 1 */
     display: flex;
     align-items: center;
 }
 
 .item-actions-repeat {
     grid-column: 2 / 3;
-    /* Le bouton Supprimer est aligné à droite, mais la maquette est trompeuse. Le bouton Supprimer est en fait sur la ligne de quantité. */
-    /* Pour la fidélité, nous allons laisser la grille et réajuster les éléments d'action */
+    /* Le bouton Supprimer est aligne  a droite, mais la maquette est trompeuse. Le bouton Supprimer est en fait sur la ligne de quantite. */
+    /* Pour la fidelite, nous allons laisser la grille et reajuster les elements d'action */
     display: none;
-    /* Cache la div répétée si nous simplifions l'alignement */
+    /* Cache la div repetee si nous simplifions l'alignement */
 }
 
 
-/* Alignement des actions (Quantité + Supprimer) */
+/* Alignement des actions (Quantite + Supprimer) */
 .item-actions {
     grid-column: 1 / 3;
     /* Pour simplifier, les actions prennent toute la largeur */
     display: flex;
     justify-content: space-between;
-    /* Espace entre contrôle et supprimer */
+    /* Espace entre controle et supprimer */
     align-items: center;
     margin-top: 10px;
 }
@@ -9452,15 +9456,118 @@ body.has-carton-modal {
 }
 
 .btn-supprimer {
-    background: none;
-    border: none;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
     color: #384A61;
     font-size: 14px;
     font-weight: 600;
     cursor: pointer;
-    text-decoration: underline;
-    padding-right: 0;
-    /* Pas de padding pour coller à droite */
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    transition: background-color .2s ease, border-color .2s ease, color .2s ease, transform .2s ease;
+}
+
+.btn-supprimer:hover {
+    background: #fff5f7;
+    border-color: #f0c8d8;
+    color: #9f2d66;
+}
+
+.btn-supprimer:active {
+    transform: translateY(1px);
+}
+
+.btn-supprimer i {
+    font-size: 14px;
+}
+
+@media (max-width: 1024px) {
+    .btn-supprimer {
+        width: 34px;
+        height: 34px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 999px;
+        gap: 0;
+    }
+
+    .btn-supprimer__label {
+        display: none;
+    }
+}
+
+/* Modal panier: cleaner product row layout */
+.panier-modal-content .panier-item {
+    display: grid;
+    grid-template-columns: 94px minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+    margin-bottom: 18px;
+}
+
+.panier-modal-content .panier-item .item-image-wrapper {
+    width: 94px;
+    height: 94px;
+    margin-right: 0;
+}
+
+.panier-modal-content .panier-item .item-details {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.panier-modal-content .panier-item .item-name {
+    margin: 0;
+    font-size: 18px;
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.panier-modal-content .panier-item .item-weight {
+    margin: 0;
+}
+
+.panier-modal-content .panier-item .item-price {
+    margin: 0;
+}
+
+.panier-modal-content .panier-item .item-actions {
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.panier-modal-content .panier-item .quantity-control {
+    border-radius: 8px;
+}
+
+.panier-modal-content .panier-item .qty-btn {
+    width: 32px;
+    height: 32px;
+}
+
+@media (max-width: 768px) {
+    .panier-modal-content .panier-item {
+        grid-template-columns: 82px minmax(0, 1fr);
+        gap: 10px;
+    }
+
+    .panier-modal-content .panier-item .item-image-wrapper {
+        width: 82px;
+        height: 82px;
+    }
+
+    .panier-modal-content .panier-item .item-name {
+        font-size: 14px;
+    }
 }
 
 /* --- 3. Pied de page (Total et Payer) --- */
@@ -9524,9 +9631,9 @@ body.has-carton-modal {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
-    /* Arrière-plan sombre semi-transparent */
+    /* Arri�re-plan sombre semi-transparent */
     display: none;
-    /* MASQUÉ PAR DÉFAUT : À modifier avec JS pour l'afficher */
+    /* MASQU� PAR DEFAUT :  a modifier avec JS pour l'afficher */
     justify-content: center;
     align-items: center;
     z-index: 1000;
@@ -9546,7 +9653,7 @@ body.has-carton-modal {
     border-radius: 6px;
 }
 
-/* --- En-tête --- */
+/* --- En-t�te --- */
 .modal-header {
     display: flex;
     justify-content: space-between;
@@ -9573,7 +9680,7 @@ body.has-carton-modal {
 
 
 /* ================================================= */
-/* CONTENEUR GLOBAL FLEX (Côte à côte) */
+/* CONTENEUR GLOBAL FLEX (Cote a cote) */
 /* ================================================= */
 
 .recap-toggle {
@@ -9584,7 +9691,7 @@ body.has-carton-modal {
 
   padding: 18px 20px;
   border: none;
-  background-color: #f3f1ef; /* gris clair comme sur l’image */
+  background-color: #f3f1ef; /* gris clair comme sur l'image */
   cursor: pointer;
 
   font-family: inherit;
@@ -9594,18 +9701,18 @@ body.has-carton-modal {
 .recap-toggle__label {
   font-size: 20px;
   font-weight: 600;
-  color: #5a8f00; /* vert */
+  color: #83BA3A; /* vert */
 }
 
-/* Icône chevron */
+/* Icone chevron */
 .recap-toggle__icon {
   margin: 0 16px;
-  color: #5a8f00;
+  color: #83BA3A;
   font-size: 20px;
   transition: transform 0.3s ease;
 }
 
-/* Total à droite */
+/* Total  a droite */
 .recap-toggle__total {
   font-size: 28px;
   font-weight: 800;
@@ -9618,7 +9725,7 @@ body.has-carton-modal {
   transform: rotate(180deg);
 }
 
-/* Section récapitulative - Animation fluide */
+/* Section r�capitulative - Animation fluide */
 #orderRecapSection {
   overflow: hidden;
   transition: max-height 0.4s ease, opacity 0.3s ease;
@@ -9630,7 +9737,7 @@ body.has-carton-modal {
   opacity: 1;
 }
 
-/* Hover léger (optionnel mais fidèle UX) */
+/* Hover leger (optionnel mais fidele UX) */
 .recap-toggle:hover {
   background-color: #edeae6;
 }
@@ -9646,7 +9753,7 @@ body.has-carton-modal {
 }
 
 .section-content {
-    /* Styles généraux pour chaque colonne */
+    /* Styles g�n�raux pour chaque colonne */
     padding: 20px;
     border-radius: 8px;
 }
@@ -9659,10 +9766,10 @@ body.has-carton-modal {
 
 .recap-section {
     max-width: 450px;
-    /* La section récapitulative est plus étroite */
+    /* La section r�capitulative est plus �troite */
     padding: 0;
-    /* Pas de padding car le conteneur interne gère le fond vert */
-    /* Retirer l'ombre et le fond blanc par défaut car le conteneur interne le gère */
+    /* Pas de padding car le conteneur interne gere le fond vert */
+    /* Retirer l'ombre et le fond blanc par d�faut car le conteneur interne le gere */
     box-shadow: none;
     background-color: transparent;
 }
@@ -9836,11 +9943,11 @@ body.has-carton-modal {
 }
 
 /* ================================================= */
-/* II. STYLES DU RÉSUMÉ DE LA COMMANDE */
+/* II. STYLES DU RESUME DE LA COMMANDE */
 /* ================================================= */
 
 .recap-commande-container {
-    background-color: #CCF09173;
+    background-color: #83BA3A73;
     padding: 41px;
     width: 134%;
     font-family: 'Poppins';
@@ -9869,7 +9976,7 @@ body.has-carton-modal {
     margin-right: 15px;
 }
 
-/* Style spécial pour les produits Citronnade dans la recap */
+/* Style sp�cial pour les produits Citronnade dans la recap */
 .item-image-wrapper--citronnade {
     width: 78px !important;
 }
@@ -9895,7 +10002,7 @@ body.has-carton-modal {
     z-index: 2;
 }
 
-/* Style spécial pour les produits Huiles dans la recap */
+/* Style sp�cial pour les produits Huiles dans la recap */
 .recap-item-image--oil {
     width: 100%;
     height: 100%;
@@ -10090,7 +10197,7 @@ body.has-carton-modal {
     color: #172B4D;
 } 
 
-/* styles du bouton réumer */
+/* styles du bouton r�sumer */
 
 
 @media (min-width:360px )and (max-width: 1024px) {
@@ -10098,7 +10205,7 @@ body.has-carton-modal {
         display: flex;
         justify-content: center;
         align-items: flex-start;
-        padding: 70px 0px;
+        padding: 45px 0px;
         gap: 0px;
         min-height: 115vh;
         font-family: 'Poppins';
@@ -10107,7 +10214,7 @@ body.has-carton-modal {
     .recap-toggle__label {
         font-size: 12px;
         font-weight: 500;
-        color: #5a8f00;
+        color: #83BA3A;
     }
     .recap-toggle__total {
         font-size: 16px;
@@ -10118,32 +10225,76 @@ body.has-carton-modal {
     }
     .recap-commande-container{
         padding:20px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        box-sizing: border-box;
     }
-    .item-title {
+    #orderRecapSection .item-title {
         font-size: 14px;
         font-weight: 500;
-        width: 175px;
+        width: auto;
+        max-width: 100%;
+        overflow-wrap: anywhere;
     }
-    .recap-article-item {
-        width: 100px;
+    #orderRecapSection .recap-article-item {
+        width: 100%;
     }
-    .item-image-wrapper{
+    #orderRecapSection .item-image-wrapper{
         width:77px;
     }
     .recap-details{
-        width: 315px;
+        width: 100% !important;
+        max-width: 100%;
     }
     .total-final-row {
-        width: 320px;
+        width: 100%;
+        max-width: 100%;
     }
 
+}
+
+@media (max-width: 768px) {
+    #orderRecapSection .recap-commande-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 16px;
+        height: auto;
+        box-sizing: border-box;
+    }
+
+    #orderRecapSection .recap-details {
+        width: 100% !important;
+        max-width: 100%;
+    }
+
+    #orderRecapSection .recap-row {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+
+    #orderRecapSection .recap-row .label {
+        flex: 1 1 auto;
+        min-width: 0;
+    }
+
+    #orderRecapSection .recap-row .value {
+        flex: 0 1 56%;
+        min-width: 0;
+        text-align: right;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
 }
 @media (min-width: 1024px) {
   .recap-toggle {
     display: none;
   }
   
-  /* Sur desktop, la section récapitulative reste visible */
+  /* Sur desktop, la section r�capitulative reste visible */
   #orderRecapSection {
     max-height: none !important;
     opacity: 1 !important;
@@ -10160,25 +10311,25 @@ body.has-carton-modal {
 /* Global logo sizing override for responsive pages */
 @media (max-width: 1024px) {
     .navbar .navbar-logo {
-        height: 52px !important;
+        height: 68px !important;
         width: auto !important;
-        max-height: 52px !important;
+        max-height: 68px !important;
     }
 }
 
 @media (max-width: 768px) {
     .navbar .navbar-logo {
-        height: 46px !important;
+        height: 62px !important;
         width: auto !important;
-        max-height: 46px !important;
+        max-height: 62px !important;
     }
 }
 
 @media (max-width: 599px) {
     .navbar .navbar-logo {
-        height: 42px !important;
+        height: 58px !important;
         width: auto !important;
-        max-height: 42px !important;
+        max-height: 58px !important;
     }
 }
 
@@ -10193,7 +10344,7 @@ html, body, button, input, select, textarea {
   font-family: var(--font-family-global);
 }
 
-/* Panier page only: responsive fix for "Ceux-ci pourraient vous intéresser aussi" */
+/* Panier page only: responsive fix for "Ceux-ci pourraient vous int�resser aussi" */
 #panierSection + .carousel-header + .products-grid-section {
     padding: 24px 12px 18px;
 }
@@ -10316,13 +10467,86 @@ html, body, button, input, select, textarea {
     .product-card__overlay {
         opacity: 1;
         visibility: visible;
-        transform: translate(-50%, 0);
+        transform: translate(-56%, 0);
     }
 
     .product-card__select,
     .product-card__cta,
     .product-card__cta--carton {
-        width: 100%;
-        max-width: 220px;
+        max-width: 168px;
+        position: relative;
+        left: 21px;
     }
 }
+/* Article share: premium interaction (scoped to detail page) */
+.article-detail-page .share-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.article-detail-page .share-section p {
+  margin: 0 8px 0 0;
+  font-weight: 600;
+  color: #344054;
+}
+
+.article-detail-page .share-button {
+  border-radius: 999px;
+  transition: transform .2s ease, box-shadow .2s ease, filter .2s ease;
+  will-change: transform;
+}
+
+.article-detail-page .share-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 22px rgba(15, 23, 42, .16);
+}
+
+.article-detail-page .share-button.is-sharing {
+  opacity: .82;
+  pointer-events: none;
+  filter: saturate(1.1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .article-detail-page .share-button,
+  .article-detail-page .share-button:hover {
+    transition: none;
+    transform: none;
+  }
+}
+
+/* Actualites loading state when DB has no published article yet */
+.articles-section.actualite-page .articles-loading-state {
+  grid-column: 1 / -1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin: 22px auto 10px;
+  padding: 14px 18px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #1f2937;
+  font-weight: 600;
+}
+
+.articles-section.actualite-page .articles-loading-state .fa-spinner {
+  animation: freshy-spin-loader 0.9s linear infinite;
+}
+
+.articles-section.actualite-page .articles-loading-state.is-empty {
+  background: rgba(255, 255, 255, 0.96);
+  color: #334155;
+}
+
+@keyframes freshy-spin-loader {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+
+
+
+

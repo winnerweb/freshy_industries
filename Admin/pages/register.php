@@ -18,6 +18,7 @@ $siteBase = rtrim($siteBase, '/');
 $backgroundUrl = ($siteBase !== '' ? $siteBase : '') . '/images/banniere_vente.webp';
 $logoUrl = ($siteBase !== '' ? $siteBase : '') . '/images/logo_freshy.webp';
 $videoUrl = adminResolveAuthVideoUrl($siteBase);
+$homeUrl = ($siteBase !== '' ? $siteBase : '') . '/index.php';
 
 $pdo = db();
 $error = '';
@@ -79,6 +80,9 @@ if (($_SERVER['REQUEST_METHOD'] ?? 'GET') === 'POST') {
     <div class="admin-register-overlay">
         <div class="admin-register-heading">
             <h1>Bienvenue, veuillez creer votre compte admin</h1>
+            <p class="admin-auth-home-link">
+                <a href="<?php echo htmlspecialchars($homeUrl, ENT_QUOTES, 'UTF-8'); ?>">Retour a l'accueil</a>
+            </p>
         </div>
 
         <section class="admin-register-card" aria-labelledby="adminRegisterTitle">

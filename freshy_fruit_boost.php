@@ -1,6 +1,6 @@
 ﻿<?php
-$page_title = 'Freshy le Fruit BoostÃ©';
-$additional_css = []; // Plus besoin de freshy_fruit_boostÃ©.css - tout est dans freshy_style.css
+$page_title = 'Freshy le Fruit Boosté';
+$additional_css = [];
 include 'includes/header.php';
 ?>
 
@@ -9,14 +9,11 @@ include 'includes/header.php';
             <div class="radial-gradient"></div>
             <img src="images/barnière Freshy le fruit b.webp" alt="Freshy fruits man and biere" class="banner-image">
         </div>
-        
     </section>
-
-    <!-- Contenu spÃ©cifique Ã  la page Freshy fruit boostÃ© sera ajoutÃ© ici -->
 
     <section class="text-section freshy-fruit-page">
         <p>Freshy palm est une marque de Freshy industrie qui vous propose trois gammes de
-        produits pour la consommation. Nous disposons de la crÃ¨me concentrÃ©e de noix de
+        produits pour la consommation. Nous disposons de la crème concentrée de noix de
         palme, de l'huile palmiste, et de l'huile de palme.</p>
     </section>
 
@@ -54,7 +51,4 @@ include 'includes/header.php';
         </div>
     </section>
 
-    <!--Section footer-->
-
-    <?php include 'includes/footer.php'; ?>
-
+<?php include 'includes/footer.php'; ?>

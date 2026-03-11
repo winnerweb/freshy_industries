@@ -137,7 +137,7 @@
           </div>
           <div class="admin-form-group admin-form-group--full">
             <label for="articleBody2">Contenu bloc 2</label>
-            <textarea class="admin-textarea" id="articleBody2" name="body_2" required>${article?.body_2 || ''}</textarea>
+            <textarea class="admin-textarea" id="articleBody2" name="body_2">${article?.body_2 || ''}</textarea>
           </div>
           <div class="admin-form-group admin-form-group--full">
             <label for="articleImageUrl">Image URL</label>
@@ -234,7 +234,7 @@
             status: String(fd.get('status') || 'draft').trim(),
             published_at: String(fd.get('published_at') || '').trim().replace('T', ' '),
           };
-          if (!payload.title || !payload.excerpt || !payload.intro || !payload.body_1 || !payload.body_2) {
+          if (!payload.title || !payload.excerpt || !payload.intro || !payload.body_1) {
             notify('error', 'Veuillez remplir tous les champs obligatoires.');
             return;
           }

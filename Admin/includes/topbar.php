@@ -8,14 +8,14 @@
             <input id="adminTopbarSearch" type="search" placeholder="Rechercher..." aria-label="Rechercher">
         </label>
     <?php endif; ?>
-    <button class="admin-notif" type="button" aria-label="Notifications">
+    <button class="admin-notif" id="adminNotifBtn" type="button" aria-label="Notifications" aria-haspopup="dialog" aria-expanded="false">
         <i class="fa-regular fa-bell" aria-hidden="true"></i>
-        <span class="admin-notif__dot"></span>
+        <span class="admin-notif__dot" id="adminNotifBadge" hidden>0</span>
     </button>
     <div class="admin-user">
         <div class="admin-user__avatar">
             <?php if (!empty($displayAvatarUrl)): ?>
-                <img src="<?php echo htmlspecialchars((string) $displayAvatarUrl, ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy">
+                <img src="<?php echo htmlspecialchars(adminPublicUrl((string) $displayAvatarUrl), ENT_QUOTES, 'UTF-8'); ?>" alt="<?php echo htmlspecialchars($displayName, ENT_QUOTES, 'UTF-8'); ?>" loading="lazy">
             <?php else: ?>
                 <?php echo htmlspecialchars(adminUserInitials($displayName), ENT_QUOTES, 'UTF-8'); ?>
             <?php endif; ?>

@@ -24,7 +24,7 @@ if (!isset($freshyCsrfToken) || !is_string($freshyCsrfToken) || $freshyCsrfToken
                     <h3 style="visibility: hidden;">Sous-catégories</h3> <!-- Titre caché pour l'alignement -->
                     <ul>
                         <li><a href="freshy_palm_page.php">Freshy Palm</a></li>
-                        <li><a href="freshy_fruit_boosté.php">Freshy Fruit boosté</a></li>
+                        <li><a href="freshy_fruit_boost.php">Freshy Fruit boosté</a></li>
                         <li><a href="#">Les dérivés de la production</a></li>
                         <li><a href="actualite.php">Conseils et guide</a></li>
                     </ul>

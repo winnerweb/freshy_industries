@@ -37,9 +37,24 @@
     const isJson = (response.headers.get('content-type') || '').includes('application/json');
     const payload = isJson ? await response.json() : {};
     if (!response.ok) {
-      throw new Error(payload?.error || 'Operation impossible');
+      throw new Error(payload?.error || payload?.detail || 'Operation impossible');
     }
     return payload;
+  };
+
+  const activateTabByPanelId = (targetId) => {
+    const tabButtons = Array.from(document.querySelectorAll('#newsletterTabs [data-tab-target]'));
+    const panels = Array.from(document.querySelectorAll('.admin-tab-panel'));
+    tabButtons.forEach((node) => {
+      const active = node.getAttribute('data-tab-target') === targetId;
+      node.classList.toggle('is-active', active);
+      node.setAttribute('aria-selected', active ? 'true' : 'false');
+    });
+    panels.forEach((panel) => {
+      const active = panel.id === targetId;
+      panel.classList.toggle('is-active', active);
+      panel.hidden = !active;
+    });
   };
 
   const syncBulkUi = () => {
@@ -89,7 +104,7 @@
       return;
     }
     campaignsBody.innerHTML = campaigns.map((c) => `
-      <tr data-campaign-id="${Number(c.id || 0)}">
+      <tr data-campaign-id="${Number(c.id || 0)}" data-campaign-status="${String(c.status || 'draft')}">
         <td>${Number(c.id || 0)}</td>
         <td>${c.subject || ''}</td>
         <td><span class="admin-status admin-status--${(c.status || 'draft') === 'sent' ? 'active' : 'inactive'}">${c.status || 'draft'}</span></td>
@@ -98,8 +113,8 @@
         <td>${c.created_at || '-'}</td>
         <td>${c.sent_at || '-'}</td>
         <td>
-          <button class="admin-btn admin-btn--primary" type="button" data-action="send-campaign" ${String(c.status || '') === 'sending' ? 'disabled' : ''}>
-            Envoyer
+          <button class="admin-btn admin-btn--primary" type="button" data-action="send-campaign" ${['sending','sent'].includes(String(c.status || '')) ? 'disabled' : ''}>
+            ${String(c.status || '') === 'sent' ? 'Deja envoye' : 'Envoyer'}
           </button>
         </td>
       </tr>
@@ -189,16 +204,7 @@
       btn.addEventListener('click', () => {
         const targetId = btn.getAttribute('data-tab-target');
         if (!targetId) return;
-        tabButtons.forEach((node) => {
-          const active = node === btn;
-          node.classList.toggle('is-active', active);
-          node.setAttribute('aria-selected', active ? 'true' : 'false');
-        });
-        panels.forEach((panel) => {
-          const active = panel.id === targetId;
-          panel.classList.toggle('is-active', active);
-          panel.hidden = !active;
-        });
+        activateTabByPanelId(targetId);
       });
     });
   };
@@ -326,6 +332,7 @@
       notify('success', 'Campagne enregistree.');
       campaignForm.reset();
       await loadCampaigns();
+      activateTabByPanelId('newsletterHistoryPanel');
     } catch (error) {
       notify('error', error.message || 'Creation campagne impossible');
     } finally {
@@ -339,7 +346,16 @@
     const row = button.closest('tr[data-campaign-id]');
     if (!row) return;
     const campaignId = Number(row.dataset.campaignId || 0);
+    const campaignStatus = String(row.dataset.campaignStatus || 'draft').toLowerCase();
     if (campaignId <= 0) return;
+    if (campaignStatus === 'sent') {
+      notify('success', 'Cette campagne est deja envoyee.');
+      return;
+    }
+    if (campaignStatus === 'sending') {
+      notify('success', 'Cette campagne est deja en cours d envoi.');
+      return;
+    }
 
     button.disabled = true;
     try {
@@ -369,4 +385,3 @@
     }
   })();
 })();
-

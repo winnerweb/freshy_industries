@@ -58,7 +58,16 @@
       if (!input) return;
       const nextType = input.type === 'password' ? 'text' : 'password';
       input.type = nextType;
-      btn.classList.toggle('is-visible', nextType === 'text');
+      const isVisible = nextType === 'text';
+      btn.classList.toggle('is-visible', isVisible);
+      btn.setAttribute('aria-pressed', isVisible ? 'true' : 'false');
+      const isConfirm = targetId === 'adminRegisterPasswordConfirm';
+      btn.setAttribute(
+        'aria-label',
+        isVisible
+          ? (isConfirm ? 'Masquer la confirmation du mot de passe' : 'Masquer le mot de passe')
+          : (isConfirm ? 'Afficher la confirmation du mot de passe' : 'Afficher le mot de passe')
+      );
       input.focus();
     });
   });

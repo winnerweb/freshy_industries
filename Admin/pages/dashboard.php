@@ -99,7 +99,7 @@ ob_start();
                 <button class="admin-drag-handle" type="button" data-drag-handle aria-label="Deplacer widget graphique">
                     <i class="fa-solid fa-grip-vertical" aria-hidden="true"></i>
                 </button>
-                <h2>Ventes et achats des regimes</h2>
+                <h2>Ventes et commandes des regimes</h2>
             </div>
             <button class="admin-chart-period" type="button" id="adminChartPeriodBtn" aria-label="Periode mensuelle" aria-haspopup="menu" aria-expanded="false">
                 <i class="fa-regular fa-calendar" aria-hidden="true"></i>

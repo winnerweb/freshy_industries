@@ -113,6 +113,8 @@
 
   const body = document.body;
   const topbarSearch = document.getElementById('adminTopbarSearch');
+  const notifBtn = document.getElementById('adminNotifBtn');
+  const notifBadge = document.getElementById('adminNotifBadge');
   const overlay = document.createElement('div');
   overlay.className = 'admin-modal-overlay';
   overlay.setAttribute('aria-hidden', 'true');
@@ -212,6 +214,171 @@
   });
 
   window.AdminModal = { open, close };
+
+  let notificationsState = { count: 0, items: [], sources: { orders: 0, newsletter: 0 } };
+  let notifPollTimer = null;
+  let notificationsPollingDisabled = false;
+
+  const escapeHtml = (value) => String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const formatNotifDate = (value) => {
+    if (!value) return '-';
+    const date = new Date(String(value).replace(' ', 'T'));
+    if (Number.isNaN(date.getTime())) return String(value);
+    return date.toLocaleString('fr-FR', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+    });
+  };
+
+  const updateNotifBadge = (count) => {
+    if (!notifBadge || !notifBtn) return;
+    const safeCount = Math.max(0, Number(count || 0));
+    if (safeCount <= 0) {
+      notifBadge.hidden = true;
+      notifBadge.textContent = '0';
+      notifBtn.setAttribute('aria-label', 'Notifications');
+      return;
+    }
+    notifBadge.hidden = false;
+    notifBadge.textContent = safeCount > 99 ? '99+' : String(safeCount);
+    notifBtn.setAttribute('aria-label', `${safeCount} notifications non lues`);
+  };
+
+  const fetchNotifications = async () => {
+    if (!notifBtn) return;
+    if (notificationsPollingDisabled) return;
+    const response = await fetch('../api/admin_notifications.php', {
+      headers: { Accept: 'application/json' },
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      if (response.status === 401 || response.status === 403) {
+        // Session expired or unauthorized: stop noisy polling until a page reload/login.
+        notificationsPollingDisabled = true;
+        if (notifPollTimer) {
+          window.clearInterval(notifPollTimer);
+          notifPollTimer = null;
+        }
+      }
+      throw new Error(payload?.error || 'Notifications indisponibles');
+    }
+    notificationsState = payload?.data || notificationsState;
+    updateNotifBadge(notificationsState.count || 0);
+  };
+
+  const markNotificationsRead = async () => {
+    const response = await fetch('../api/admin_notifications.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        'X-CSRF-Token': window.getAdminCsrfToken(),
+      },
+      body: JSON.stringify({ action: 'mark_read' }),
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) {
+      throw new Error(payload?.error || 'Impossible de marquer comme lu');
+    }
+  };
+
+  const openNotificationsModal = async () => {
+    if (!window.AdminModal || !notifBtn) return;
+    const items = Array.isArray(notificationsState.items) ? notificationsState.items : [];
+    const sources = notificationsState.sources || {};
+    const rowsHtml = items.length
+      ? items.map((item) => {
+        const isOrder = String(item.type || '') === 'order';
+        const icon = isOrder ? 'fa-bag-shopping' : 'fa-envelope-open-text';
+        const source = isOrder ? 'Commandes' : 'Newsletter';
+        const target = String(item.target_url || '').trim();
+        return `
+          <li class="admin-notif-item">
+            <div class="admin-notif-item__icon"><i class="fa-solid ${icon}" aria-hidden="true"></i></div>
+            <div class="admin-notif-item__content">
+              <strong>${escapeHtml(item.title || 'Notification')}</strong>
+              <p>${escapeHtml(item.message || '')}</p>
+              <small>${escapeHtml(source)} • ${escapeHtml(formatNotifDate(item.created_at))}</small>
+            </div>
+            ${target ? `<a class="admin-btn admin-btn--chip admin-notif-item__link" href="${escapeHtml(target)}">Voir</a>` : ''}
+          </li>
+        `;
+      }).join('')
+      : '<li class="admin-notif-empty">Aucune nouvelle notification.</li>';
+
+    window.AdminModal.open({
+      title: 'Notifications',
+      content: `
+        <div class="admin-notif-modal">
+          <div class="admin-notif-modal__summary">
+            <span><strong>${Number(sources.orders || 0)}</strong> commande(s)</span>
+            <span><strong>${Number(sources.newsletter || 0)}</strong> abonne(s) newsletter</span>
+          </div>
+          <ul class="admin-notif-list">${rowsHtml}</ul>
+        </div>
+      `,
+      onOpen: async () => {
+        notifBtn.setAttribute('aria-expanded', 'true');
+        if ((notificationsState.count || 0) > 0) {
+          try {
+            await markNotificationsRead();
+            notificationsState = { ...notificationsState, count: 0, items: [] };
+            updateNotifBadge(0);
+          } catch (error) {
+            // Keep UX non-blocking if mark-read fails.
+          }
+        }
+      },
+    });
+  };
+
+  notifBtn?.addEventListener('click', async () => {
+    try {
+      await fetchNotifications();
+      await openNotificationsModal();
+    } catch (error) {
+      if (typeof window.showToast === 'function') {
+        window.showToast('error', error.message || 'Notifications indisponibles', { key: 'admin_notif_error' });
+      }
+    }
+  });
+
+  overlay.addEventListener('click', (event) => {
+    if (event.target === overlay) {
+      notifBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+  closeBtn.addEventListener('click', () => {
+    notifBtn?.setAttribute('aria-expanded', 'false');
+  });
+
+  const startNotificationsPolling = async () => {
+    if (!notifBtn) return;
+    try {
+      await fetchNotifications();
+    } catch (error) {
+      // Silent background retry.
+    }
+    if (notifPollTimer) window.clearInterval(notifPollTimer);
+    notifPollTimer = window.setInterval(async () => {
+      if (notificationsPollingDisabled) return;
+      try {
+        await fetchNotifications();
+      } catch (error) {
+        // Keep polling silent for transient network failures.
+      }
+    }, 25000);
+  };
+  startNotificationsPolling();
 
   const applyGlobalAdminSearch = (query) => {
     const normalized = String(query || '').trim().toLowerCase();

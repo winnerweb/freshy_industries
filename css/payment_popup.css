@@ -1,5 +1,5 @@
 :root {
-  --payment-accent: #1ca95b;
+  --payment-accent: #83BA3A;
   --payment-danger: #d84b4b;
   --payment-bg: #f4f6fb;
   --payment-text: #0f172a;
@@ -55,7 +55,7 @@ body.payment-page {
   border-radius: 999px;
   display: grid;
   place-items: center;
-  background: rgba(28, 169, 91, 0.13);
+  background: rgba(131, 186, 58, 0.13);
 }
 
 .payment-icon-wrap.is-failed {
@@ -104,7 +104,7 @@ body.payment-page {
   background: var(--payment-accent);
   font-weight: 600;
   transition: transform 180ms ease, box-shadow 180ms ease;
-  box-shadow: 0 10px 22px rgba(28, 169, 91, 0.35);
+  box-shadow: 0 10px 22px rgba(131, 186, 58, 0.35);
 }
 
 .payment-cta.is-failed {
@@ -131,3 +131,4 @@ body.payment-page {
   0%, 100% { transform: translateY(0) rotate(0deg); }
   50% { transform: translateY(8px) rotate(15deg); }
 }
+

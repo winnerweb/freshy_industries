@@ -1,11 +1,44 @@
 <?php
 declare(strict_types=1);
 
+function productRepoColumnExists(PDO $pdo, string $tableName, string $columnName): bool
+{
+    static $cache = [];
+    $key = $tableName . '.' . $columnName;
+    if (array_key_exists($key, $cache)) {
+        return (bool) $cache[$key];
+    }
+
+    $stmt = $pdo->prepare(
+        'SELECT COUNT(*)
+         FROM information_schema.COLUMNS
+         WHERE TABLE_SCHEMA = DATABASE()
+           AND TABLE_NAME = :table_name
+           AND COLUMN_NAME = :column_name'
+    );
+    $stmt->execute([
+        ':table_name' => $tableName,
+        ':column_name' => $columnName,
+    ]);
+    $cache[$key] = ((int) $stmt->fetchColumn()) > 0;
+    return (bool) $cache[$key];
+}
+
 function productRepoFetchActiveProducts(PDO $pdo): array
 {
+    $hasCategoryActive = productRepoColumnExists($pdo, 'categories', 'is_active');
+    $hasCategorySlug = productRepoColumnExists($pdo, 'categories', 'slug');
+    $hasProductShortDescription = productRepoColumnExists($pdo, 'products', 'short_description');
+    $hasImageSortOrder = productRepoColumnExists($pdo, 'product_images', 'sort_order');
+
+    $categorySlugSelect = $hasCategorySlug ? 'c.slug AS category_slug' : "'' AS category_slug";
+    $shortDescriptionSelect = $hasProductShortDescription ? 'p.short_description' : 'NULL AS short_description';
+    $decorOrderBy = $hasImageSortOrder ? 'pi2.sort_order ASC, pi2.id ASC' : 'pi2.id ASC';
+    $categoryCondition = $hasCategoryActive ? '(c.id IS NULL OR c.is_active = 1)' : '1 = 1';
+
     $stmt = $pdo->query(
-        'SELECT p.id, p.name, p.slug, p.short_description, p.status, p.is_new,
-                c.name AS category_name, c.slug AS category_slug,
+        'SELECT p.id, p.name, p.slug, ' . $shortDescriptionSelect . ', p.status, p.is_new,
+                c.name AS category_name, ' . $categorySlugSelect . ',
                 img.image_url,
                 img_decor.image_url AS decor_image_url
          FROM products p
@@ -21,11 +54,11 @@ function productRepoFetchActiveProducts(PDO $pdo): array
             SELECT pi2.id
             FROM product_images pi2
             WHERE pi2.product_id = p.id AND pi2.is_primary = 0
-            ORDER BY pi2.sort_order ASC, pi2.id ASC
+            ORDER BY ' . $decorOrderBy . '
             LIMIT 1
          )
          WHERE p.status = "active"
-           AND (c.id IS NULL OR c.is_active = 1)
+           AND ' . $categoryCondition . '
          ORDER BY p.id DESC'
     );
     return $stmt->fetchAll();
@@ -40,9 +73,19 @@ function productRepoFetchActiveProductsByIds(PDO $pdo, array $productIds): array
     }
 
     $placeholders = implode(',', array_fill(0, count($ids), '?'));
+    $hasCategoryActive = productRepoColumnExists($pdo, 'categories', 'is_active');
+    $hasCategorySlug = productRepoColumnExists($pdo, 'categories', 'slug');
+    $hasProductShortDescription = productRepoColumnExists($pdo, 'products', 'short_description');
+    $hasImageSortOrder = productRepoColumnExists($pdo, 'product_images', 'sort_order');
+
+    $categorySlugSelect = $hasCategorySlug ? 'c.slug AS category_slug' : "'' AS category_slug";
+    $shortDescriptionSelect = $hasProductShortDescription ? 'p.short_description' : 'NULL AS short_description';
+    $decorOrderBy = $hasImageSortOrder ? 'pi2.sort_order ASC, pi2.id ASC' : 'pi2.id ASC';
+    $categoryCondition = $hasCategoryActive ? '(c.id IS NULL OR c.is_active = 1)' : '1 = 1';
+
     $stmt = $pdo->prepare(
-        "SELECT p.id, p.name, p.slug, p.short_description, p.status, p.is_new,
-                c.name AS category_name, c.slug AS category_slug,
+        "SELECT p.id, p.name, p.slug, $shortDescriptionSelect, p.status, p.is_new,
+                c.name AS category_name, $categorySlugSelect,
                 img.image_url,
                 img_decor.image_url AS decor_image_url
          FROM products p
@@ -58,11 +101,11 @@ function productRepoFetchActiveProductsByIds(PDO $pdo, array $productIds): array
             SELECT pi2.id
             FROM product_images pi2
             WHERE pi2.product_id = p.id AND pi2.is_primary = 0
-            ORDER BY pi2.sort_order ASC, pi2.id ASC
+            ORDER BY $decorOrderBy
             LIMIT 1
          )
          WHERE p.status = 'active'
-           AND (c.id IS NULL OR c.is_active = 1)
+           AND $categoryCondition
            AND p.id IN ($placeholders)"
     );
     $stmt->execute($ids);

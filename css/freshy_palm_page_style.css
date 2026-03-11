@@ -1,4 +1,4 @@
-﻿@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 
 
 body,
@@ -27,7 +27,7 @@ p {
 
 .navbar.scrolled {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    /* Ombre lÃ©gÃ¨re au dÃ©filement */
+    /* Ombre légère au défilement */
 }
 
 .navbar-logo {
@@ -67,7 +67,7 @@ p {
 
 .nav-links a.active,
 .nav-links a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
     /* Couleur verte pour actif/survol */
 }
 
@@ -78,7 +78,7 @@ p {
     bottom: 0;
     width: 100%;
     height: 2px;
-    background-color: #8EC03B;
+    background-color: #83BA3A;
 }
 
 .dropdown {
@@ -109,7 +109,7 @@ p {
 }
 
 .nav-icon:hover {
-    color: #8EC03B;
+    color: #83BA3A;
 }
 
 .btn-quote {
@@ -131,11 +131,11 @@ p {
     /* Couleur de survol */
 }
 
-/* Pour ajuster la flÃ¨che Font Awesome */
+/* Pour ajuster la flèche Font Awesome */
 .nav-links .dropdown .fas.fa-chevron-down {
     margin-left: 5px;
     font-size: 0.8em;
-    /* Ajuste la taille de la flÃ¨che si nÃ©cessaire */
+    /* Ajuste la taille de la flèche si nécessaire */
 }
 
 .dropdown-content a {
@@ -145,11 +145,11 @@ p {
     display: block;
     text-align: left;
     border-bottom: 1px solid #eee;
-    /* Ligne de sÃ©paration */
+    /* Ligne de séparation */
 }
 
 .dropdown-content a:hover {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: #fff;
 }
 
@@ -166,7 +166,7 @@ p {
     transform: rotate(180deg);
 }
 
-/* Menu Burger avec icÃ´ne Font Awesome */
+/* Menu Burger avec icône Font Awesome */
 .menu-toggle {
     display: none;
     cursor: pointer;
@@ -278,14 +278,14 @@ p {
 /* Effets hover */
 .sidebar-nav a:hover {
     background-color: #f0f0f0;
-    color: #8EC03B;
+    color: #83BA3A;
     padding-left: 25px;
     transform: translateX(5px);
 }
 
-/* Ã‰tats actifs */
+/* États actifs */
 .sidebar-link.active {
-    background-color: #8EC03B;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -301,7 +301,7 @@ p {
 }
 
 .sidebar-link.active:hover {
-    background-color: #7ab02f;
+    background-color: #83BA3A;
     color: white !important;
 }
 
@@ -343,7 +343,7 @@ p {
 }
 
 .sidebar-dropdown-content a:hover {
-    color: #8EC03B;
+    color: #83BA3A;
     background-color: #f9f9f9;
 }
 
@@ -373,7 +373,7 @@ p {
     font-size: 1.1em;
 }
 
-/* Ancien style de .category-text Ã  supprimer car remplacÃ© par .overlay-content */
+/* Ancien style de .category-text à supprimer car remplacé par .overlay-content */
 .category-text {
     display: none;
 }
@@ -435,16 +435,16 @@ p {
     }
 }
 
-/* Media query pour les trÃ¨s grands Ã©crans (> 1080px) */
+/* Media query pour les très grands écrans (> 1080px) */
 @media (min-width: 1081px) {
 
-    /* S'assurer que la sidebar et l'overlay sont cachÃ©s sur desktop */
+    /* S'assurer que la sidebar et l'overlay sont cachés sur desktop */
     .sidebar,
     .overlay {
         display: none !important;
     }
 }
-/* style banniÃ¨re*/
+/* style bannière*/
 
 .freshy-palm-banner {
     display: flex;
@@ -457,7 +457,7 @@ p {
 }
 
 .banner-left {
-    flex: 0 0 50%; /* La moitiÃ© gauche de la banniÃ¨re */
+    flex: 0 0 50%; /* La moitié gauche de la bannière */
     position: relative;
     display: flex;
     align-items: center;
@@ -490,7 +490,7 @@ p {
     position: relative;
     z-index: 3;
     text-align: center; /* Centrer le texte horizontalement */
-    margin-left: 200px; /* DÃ©caler le texte vers la droite pour ne pas Ãªtre cachÃ© par l'image */
+    margin-left: 200px; /* Décaler le texte vers la droite pour ne pas être caché par l'image */
 }
 
 .banner-left .banner-text-content p {
@@ -507,7 +507,7 @@ p {
 
  
 
-/*baniÃ¨re*/
+/*banière*/
 
 .text-section {
     max-width: 800px;
@@ -527,7 +527,7 @@ p {
     font-weight: 600;
     width: 1084px;
 }
-/*style of produit-dÃ©tail*/
+/*style of produit-détail*/
 .product-detail-section {
     display: flex;
     max-width: 1180px; /* Nouvelle largeur maximale */
@@ -611,7 +611,7 @@ p {
 /*Style footer*/
 
 .footer-section {
-    background-color: #f5f5f5; /* Couleur de fond lÃ©gÃ¨rement diffÃ©rente */
+    background-color: #f5f5f5; /* Couleur de fond légèrement différente */
     padding: 40px 60px;
     display: flex;
     justify-content: space-around;
@@ -704,4 +704,5 @@ p {
 .btn-points-vente:hover {
     background-color: #a33f7f;
 }
+
 
